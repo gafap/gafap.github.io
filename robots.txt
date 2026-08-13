@@ -1,4 +1,7 @@
+# SITE UNDER CONSTRUCTION -- currently asking all crawlers not to index anything.
+# When the site is ready to be public, change "Disallow: /" back to "Disallow:"
+# (empty = allow everything) and restore the Sitemap line below.
 User-agent: *
-Disallow:
+Disallow: /
 
-Sitemap: https://gafap.github.io/sitemap.xml
+# Sitemap: https://gafap.github.io/sitemap.xml
