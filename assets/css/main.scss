@@ -47,3 +47,35 @@
 @use "tabs";
 @use "teachings";
 @use "typograms";
+
+/* ---------------------------------------------------------------------------
+   Site-specific tweaks (not part of the al-folio theme)
+   --------------------------------------------------------------------------- */
+
+/* Rule under the "news" heading on the homepage. */
+.post .clearfix + h2 {
+  padding-bottom: 0.3rem;
+  border-bottom: 1px solid var(--global-divider-color);
+}
+
+/* News list: bulleted, with the date in bold immediately before the text. */
+.news-list {
+  list-style: disc outside;
+  margin: 0.6rem 0 0;
+  padding-left: 1.2rem;
+
+  li {
+    margin-bottom: 0.45rem;
+    line-height: 1.55;
+  }
+}
+
+.news-date {
+  font-weight: 600;
+  color: var(--global-text-color);
+}
+
+.news-scrollable {
+  max-height: 60vw;
+  overflow-y: auto;
+}

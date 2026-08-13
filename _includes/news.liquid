@@ -1,0 +1,42 @@
+{% comment %}
+  LOCAL OVERRIDE of al_folio_core's _includes/news.liquid.
+
+  The gem renders news as a table with the date in a fixed 20%-wide column, which
+  pushes each item's text far to the right. This version renders a simple bulleted
+  list with the date in bold, inline, immediately followed by the text.
+
+  After `bundle update` of al_folio_core, compare against the gem's version with:
+    bundle exec al-folio upgrade overrides diff _includes/news.liquid
+{% endcomment %}
+
+<div class="news">
+  {% if site.news != blank %}
+    {% assign news_size = site.news | size %}
+    <div
+      {% if include.limit and page.announcements.scrollable and news_size > 3 %}
+        class="news-scrollable"
+      {% endif %}
+    >
+      <ul class="news-list">
+        {% assign news = site.news | reverse %}
+        {% if include.limit and page.announcements.limit %}
+          {% assign news_limit = page.announcements.limit %}
+        {% else %}
+          {% assign news_limit = news_size %}
+        {% endif %}
+        {% for item in news limit: news_limit %}
+          <li>
+            <span class="news-date">{{ item.date | date: '%B %-d, %Y' }}.</span>
+            {% if item.inline %}
+              {{ item.content | remove: '<p>' | remove: '</p>' | emojify }}
+            {% else %}
+              <a class="news-title" href="{{ item.url | relative_url }}">{{ item.title }}</a>
+            {% endif %}
+          </li>
+        {% endfor %}
+      </ul>
+    </div>
+  {% else %}
+    <p>No news so far...</p>
+  {% endif %}
+</div>
