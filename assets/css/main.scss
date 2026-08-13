@@ -1,0 +1,49 @@
+---
+# Only the main Sass file needs front matter (the dashes are enough)
+---
+@charset "utf-8";
+
+/* LOCAL OVERRIDE of al_folio_core's assets/css/main.scss.
+   Identical to the gem's version except for the two extra colour values passed
+   into the `@use "variables" with (...)` block below.
+
+   The gem's _themes.scss maps:
+     --global-theme-color -> $purple-color  in light mode
+     --global-theme-color -> $cyan-color    in dark mode
+   so configuring those two here recolours links, accents and badges across the
+   whole site, in both modes, without copying any other theme SCSS.
+
+   After `bundle update` of al_folio_core, compare against the gem's main.scss:
+     bundle exec al-folio upgrade overrides diff assets/css/main.scss
+*/
+
+/* Built-in Sass modules you'll likely use across partials */
+@use "sass:math";
+@use "sass:string";
+
+/* Configure your design tokens BEFORE loading any of your partials. */
+@use "variables" with (
+  $max-content-width: {{ site.max_width | default: "930px" }},
+  /* Classic academic blue: 6.57:1 against white, above the WCAG AA 4.5:1 minimum. */
+  $purple-color: #0b5fa5,
+  /* Lighter blue for dark mode: 7.53:1 against the #1c1c1d dark background. */
+  $cyan-color: #6fb3e8
+);
+
+/* Your project partials */
+@use "themes";
+@use "layout";
+
+// Core styles organized by usage
+@use "typography";
+@use "navbar";
+@use "footer";
+@use "blog";
+@use "publications";
+@use "components";
+@use "utilities";
+
+// Other specialized styles
+@use "tabs";
+@use "teachings";
+@use "typograms";
