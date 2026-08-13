@@ -2,7 +2,7 @@
 layout: about
 title: about
 permalink: /
-subtitle: Associate Professor of Economics, <a href='https://www.royalholloway.ac.uk/research-and-teaching/departments-and-schools/economics/'>Department of Economics</a>, Royal Holloway, University of London.
+subtitle: Associate Professor of Economics, <a href='https://www.royalholloway.ac.uk/research-and-education/subjects/economics/about-us/'>Department of Economics</a>, Royal Holloway, University of London.
 
 profile:
   align: right
