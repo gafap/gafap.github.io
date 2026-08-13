@@ -365,11 +365,13 @@ scholar:
   details_link: Details
 
   query: "@*"
-  # Entries are grouped under year headings, newest first. The type of each entry
-  # (Journal Article / Book Chapter / Working Paper / Work in Progress) is shown by
-  # the `abbr` field in _bibliography/papers.bib.
-  group_by: year
-  group_order: descending
+  # The research page defines its own sections (Publications / Book Chapters /
+  # Working Papers / Work in Progress) by querying BibTeX entry types, so the
+  # per-year grouping is switched off. Within each section entries are sorted
+  # newest first.
+  group_by: none
+  sort_by: year
+  order: descending
 
 # Display different badges withs stats for your publications
 # Customize badge behavior in _layouts/bib.liquid
