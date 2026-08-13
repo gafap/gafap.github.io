@@ -6,8 +6,7 @@ title: blank # the website title (if blank, full name will be used instead)
 first_name: Gabriel
 middle_name: A.
 last_name: Facchini Palma
-contact_note: >
-  The best way to reach me is by email.
+contact_note: # left empty on purpose: no sentence under the contact icons
 description: > # the ">" symbol means to ignore newlines until "footer_text:"
   Associate Professor of Economics at Royal Holloway, University of London. Research in health, labour and education economics.
 footer_text: >

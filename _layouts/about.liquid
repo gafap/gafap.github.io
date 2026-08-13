@@ -49,7 +49,26 @@ layout: default
       <p class="desc">{{ page.subtitle }}</p>
     </header>
 
-    <div class="clearfix">{{ content }}</div>
+    {% comment %}
+      The contact icons live INSIDE the clearfix wrapper, immediately after the bio.
+      That keeps them in the same text column as the bio, so they sit to the left of
+      the floated photo. In the gem's version they came after the news section and
+      after the float had been cleared, so they rendered full-width below everything.
+    {% endcomment %}
+    <div class="clearfix">
+      {{ content }}
+
+      <!-- Social -->
+      {% if page.social %}
+        <div class="social">
+          <div class="contact-icons">{% social_links %}</div>
+
+          {% if site.contact_note %}
+            <div class="contact-note">{{ site.contact_note }}</div>
+          {% endif %}
+        </div>
+      {% endif %}
+    </div>
 
     <!-- News -->
     {% if page.announcements and page.announcements.enabled %}
@@ -73,15 +92,6 @@ layout: default
         <a href="{{ '/publications/' | relative_url }}" style="color: inherit">selected publications</a>
       </h2>
       {% include selected_papers.liquid %}
-    {% endif %}
-
-    <!-- Social -->
-    {% if page.social %}
-      <div class="social">
-        <div class="contact-icons">{% social_links %}</div>
-
-        <div class="contact-note">{{ site.contact_note }}</div>
-      </div>
     {% endif %}
 
     {% if site.newsletter and site.newsletter.enabled and site.footer_fixed %}

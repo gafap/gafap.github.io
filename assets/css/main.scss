@@ -52,8 +52,43 @@
    Site-specific tweaks (not part of the al-folio theme)
    --------------------------------------------------------------------------- */
 
-/* Rule under the "news" heading on the homepage. */
+/* Contact icons: smaller than the theme default (4rem), left-aligned, and given
+   clear separation from the news section that follows. */
+.social {
+  text-align: left;
+  margin-top: 1.4rem;
+
+  .contact-icons {
+    font-size: 1.7rem;
+    line-height: 1;
+
+    a {
+      margin-right: 0.65rem;
+
+      img {
+        width: 1.5rem;
+        height: 1.5rem;
+        margin-bottom: 0;
+      }
+
+      svg {
+        width: 1.6rem;
+        height: 1.7rem;
+        margin-bottom: 0;
+
+        image {
+          width: 1.6rem;
+          height: 1.6rem;
+        }
+      }
+    }
+  }
+}
+
+/* Rule under the "news" heading on the homepage, with breathing room above it
+   so the contact icons are not crowded against the news section. */
 .post .clearfix + h2 {
+  margin-top: 3rem;
   padding-bottom: 0.3rem;
   border-bottom: 1px solid var(--global-divider-color);
 }
