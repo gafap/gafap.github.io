@@ -10,7 +10,8 @@
        "Bib"     -> "+bib"        (expands the BibTeX below the entry)
        "Awarded" -> "+awarded"    (expands the award text below the entry)
        "DOI"     -> "journal"     (external link to the published article)
-       "PDF"     -> "WP"          (the linked PDF is the working-paper version)
+       "PDF"     -> "WP"          (the linked PDF is the working-paper version;
+                                   override per entry with `pdf_label`)
      The "+" marks buttons that reveal text in place rather than navigating away.
 
   2. The left-hand `.abbr` column is gone and the entry runs the full width of
@@ -207,10 +208,17 @@
         {% endif %}
       {% endif %}
       {% if entry.pdf %}
+        {%- comment -%}
+          The PDF linked from an entry is normally the working-paper version, so
+          the button reads "WP". Entries where that is not true set `pdf_label`
+          in papers.bib to override it — the nation-building book chapter, for
+          instance, links to the published CEPR volume rather than a preprint.
+        {%- endcomment -%}
+        {% assign pdf_label = entry.pdf_label | default: 'WP' %}
         {% if entry.pdf contains '://' %}
-          <a href="{{ entry.pdf }}" class="btn btn-sm z-depth-0" role="button">WP</a>
+          <a href="{{ entry.pdf }}" class="btn btn-sm z-depth-0" role="button">{{ pdf_label }}</a>
         {% else %}
-          <a href="{{ entry.pdf | prepend: '/assets/pdf/' | relative_url }}" class="btn btn-sm z-depth-0" role="button">WP</a>
+          <a href="{{ entry.pdf | prepend: '/assets/pdf/' | relative_url }}" class="btn btn-sm z-depth-0" role="button">{{ pdf_label }}</a>
         {% endif %}
       {% endif %}
       {% if entry.supp %}
