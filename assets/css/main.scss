@@ -52,6 +52,33 @@
    Site-specific tweaks (not part of the al-folio theme)
    --------------------------------------------------------------------------- */
 
+/* The theme toggle has only two states here (see assets/js/theme.js), so the
+   composite half-moon/half-sun "system" icon is never wanted. The JS already
+   avoids the "system" setting; this hides the icon outright so it cannot flash
+   up before theme.js runs, or appear at all if the script fails to load. */
+#light-toggle-system {
+  display: none !important;
+}
+
+/* The theme bolds only the first name in the navbar (`<span class="font-weight-bold">
+   Gabriel</span> A. Facchini Palma`) and sets the rest in `font-weight-lighter`.
+   Bold the whole name instead, to match the heading on the about page. */
+.navbar.navbar-light .navbar-brand.title {
+  font-weight: 700;
+}
+
+/* Profile photo: a different picture in each mode. The theme already defines
+   `.only-light` / `.only-dark` and flips them on `html[data-theme]`, so the two
+   figures just need to be wrapped in those classes (see _layouts/about.liquid).
+   Both images are square and the same pixel size, so switching theme does not
+   reflow the page. */
+.profile {
+  .only-light,
+  .only-dark {
+    margin: 0;
+  }
+}
+
 /* Contact icons: smaller than the theme default (4rem), left-aligned, and given
    clear separation from the news section that follows. */
 .social {
@@ -113,4 +140,178 @@
 .news-scrollable {
   max-height: 60vw;
   overflow-y: auto;
+}
+
+/* ---------------------------------------------------------------------------
+   CV page
+   ---------------------------------------------------------------------------
+   The rendercv templates in the al_folio_cv gem still emit Bootstrap 4 markup
+   (`list-group`, `table-cv`, `badge`, `location`, ...), but this site runs the
+   Tailwind style engine with `al_folio.compat.bootstrap.enabled: false`. The
+   Tailwind build ships a compat shim for the grid (`row`, `col-*`), `card` and
+   `badge`, but NOT for the rest — so the entries rendered as bare bulleted
+   lists with browser-default spacing, and the location icons had no styling at
+   all. These rules fill in the gap rather than switching the deprecated
+   Bootstrap compat layer back on. */
+
+.cv {
+  /* Entry lists: the theme colours `.list-group-item` but never gives it the
+     base list reset, padding or separator that Bootstrap would have. */
+  .list-group {
+    margin-bottom: 0;
+    padding-left: 0;
+    list-style: none;
+  }
+
+  .list-group-item {
+    padding: 0.85rem 0;
+    border: 0;
+    border-top: 1px solid var(--global-divider-color);
+
+    &:first-child {
+      border-top: 0;
+      padding-top: 0.35rem;
+    }
+
+    &:last-child {
+      padding-bottom: 0.35rem;
+    }
+  }
+
+  /* Card heading: a little more separation from the entries beneath it. */
+  .card-title {
+    margin-bottom: 0.9rem;
+    font-size: 1.3rem;
+  }
+
+  /* The small tables used for the contact block and for the date/location
+     column inside each entry. */
+  .table-cv {
+    width: 100%;
+    margin-bottom: 0;
+    border-collapse: collapse;
+
+    td {
+      border: 0;
+      vertical-align: top;
+    }
+  }
+
+  /* Date badge. `.badge` itself comes from the Tailwind compat shim and the
+     theme already forces its colours; it just needs room to breathe. */
+  .badge {
+    padding: 0.35em 0.6em;
+    font-size: 0.72rem;
+    letter-spacing: 0.02em;
+    white-space: normal;
+  }
+
+  /* "Egham, UK" under the date badge. */
+  .location {
+    margin: 0.4rem 0 0;
+    font-size: 0.8rem;
+    line-height: 1.3;
+    color: var(--global-text-color-light);
+  }
+
+  .iconlocation {
+    margin-right: 0.3rem;
+    font-size: 0.75rem;
+  }
+
+  /* Bullet points hanging off an entry (thesis committee, award details, ...). */
+  .items {
+    margin: 0.4rem 0 0 1.05rem;
+    padding-left: 1rem;
+    list-style: disc outside;
+
+    li {
+      margin-bottom: 0.2rem;
+    }
+
+    .item {
+      font-size: 0.9rem;
+      color: var(--global-text-color-light);
+    }
+  }
+
+  /* Entry title, and the institution line under it. */
+  h6.title {
+    margin-bottom: 0.15rem;
+    font-size: 1rem;
+  }
+
+  h6 {
+    line-height: 1.4;
+  }
+}
+
+/* ---------------------------------------------------------------------------
+   Teaching page
+   ---------------------------------------------------------------------------
+   Modelled on https://gregveramendi.github.io/teaching.html: the institution as
+   a coloured sub-heading, then one row per course with the course name on the
+   left, the years right-aligned and muted, and a hairline rule between rows. */
+
+.teaching-section {
+  margin-bottom: 2.25rem;
+}
+
+.teaching-institution {
+  margin-bottom: 0.75rem;
+  padding-bottom: 0.35rem;
+  border-bottom: 1px solid var(--global-divider-color);
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: var(--global-theme-color);
+}
+
+.teaching-list {
+  margin: 0;
+  padding-left: 0;
+  list-style: none;
+}
+
+.teaching-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 1.5rem;
+  padding: 0.5rem 0;
+
+  & + .teaching-item {
+    border-top: 1px solid var(--global-divider-color);
+  }
+}
+
+.teaching-course {
+  font-weight: 500;
+}
+
+.teaching-level {
+  margin-left: 0.35rem;
+  font-size: 0.85rem;
+  font-weight: 400;
+  font-style: italic;
+  color: var(--global-text-color-light);
+}
+
+.teaching-years {
+  flex-shrink: 0;
+  font-size: 0.9rem;
+  text-align: right;
+  color: var(--global-text-color-light);
+}
+
+/* Stack the two halves on narrow screens rather than squeezing them. */
+@media (max-width: 576px) {
+  .teaching-item {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.15rem;
+  }
+
+  .teaching-years {
+    text-align: left;
+  }
 }

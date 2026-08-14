@@ -4,11 +4,17 @@ layout: default
 {% comment %}
   LOCAL OVERRIDE of al_folio_core's _layouts/about.liquid.
 
-  Two changes from the gem's version:
+  Three changes from the gem's version:
   1. The profile photo block is moved ABOVE the <header>, so that the floated
      image sits alongside the name, subtitle and bio rather than only alongside
      the bio. (A float only affects content that comes after it in the markup.)
   2. The whole name is bold, instead of just the first name.
+  3. An optional second photo for dark mode: set `profile.image_dark` in the
+     page front matter and it replaces `profile.image` whenever the dark theme
+     is active. Both are rendered and one is hidden with the theme's existing
+     `.only-light` / `.only-dark` classes, so the swap happens instantly on
+     toggle with no second request. Keep the two images the same dimensions,
+     otherwise the page reflows when the theme changes.
 
   After `bundle update` of al_folio_core, compare against the gem's version with:
     bundle exec al-folio upgrade overrides diff _layouts/about.liquid
@@ -27,10 +33,26 @@ layout: default
           {% endif %}
           {% capture sizes %}(min-width: {{ site.max_width }}) {{ site.max_width | minus: 30 | times: 0.3}}px, (min-width: 576px)
       30vw, 95vw"{% endcapture %}
-          {%
-            include figure.liquid loading="eager" path=profile_image_path class=profile_image_class sizes=sizes alt=page.profile.image
-            cache_bust=true
-          %}
+          {% if page.profile.image_dark %}
+            {% assign profile_image_dark_path = page.profile.image_dark | prepend: 'assets/img/' %}
+            <div class="only-light">
+              {%
+                include figure.liquid loading="eager" path=profile_image_path class=profile_image_class sizes=sizes
+                alt=page.profile.image cache_bust=true
+              %}
+            </div>
+            <div class="only-dark">
+              {%
+                include figure.liquid loading="eager" path=profile_image_dark_path class=profile_image_class sizes=sizes
+                alt=page.profile.image_dark cache_bust=true
+              %}
+            </div>
+          {% else %}
+            {%
+              include figure.liquid loading="eager" path=profile_image_path class=profile_image_class sizes=sizes alt=page.profile.image
+              cache_bust=true
+            %}
+          {% endif %}
         {% endif %}
         {% if page.profile.more_info %}
           <div class="more-info">{{ page.profile.more_info }}</div>
@@ -73,7 +95,7 @@ layout: default
     <!-- News -->
     {% if page.announcements and page.announcements.enabled %}
       <h2>
-        <a href="{{ '/news/' | relative_url }}" style="color: inherit">news</a>
+        <a href="{{ '/news/' | relative_url }}" style="color: inherit">News</a>
       </h2>
       {% include news.liquid limit=true %}
     {% endif %}
