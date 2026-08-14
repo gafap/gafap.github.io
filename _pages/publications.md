@@ -2,7 +2,10 @@
 layout: page
 permalink: /publications/
 title: Research
-description: Publications by categories in reversed chronological order.
+# Describes what this page actually contains: the sections below are the four
+# BibTeX entry types, and `order: descending` in _config.yml sorts each newest
+# first. This line is also the page's SEO description.
+description: Journal articles, book chapters and working papers, most recent first.
 nav: true
 nav_order: 1
 # No `_styles` block. This page used to hide its own header and set its own
