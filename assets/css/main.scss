@@ -72,6 +72,23 @@
   font-weight: 700;
 }
 
+/* Body-copy links: Roboto Regular rather than the Roboto Light the theme sets on
+   `body`. Links are distinguished by colour alone until they are hovered, and at
+   weight 300 the strokes are thin enough that even a 9:1 blue reads as faint. A
+   single step up to 400 restores the weight without touching the palette.
+
+   Deliberately scoped to prose inside the main content area: the navbar, footer,
+   contact icons and the `.btn` links under each publication all have their own
+   styling and are left as they are. */
+.post {
+  p a,
+  li a:not(.btn),
+  td a,
+  figcaption a {
+    font-weight: 400;
+  }
+}
+
 /* Profile photo: a different picture in each mode. The theme already defines
    `.only-light` / `.only-dark` and flips them on `html[data-theme]`, so the two
    figures just need to be wrapped in those classes (see _layouts/about.liquid).
