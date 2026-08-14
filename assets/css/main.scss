@@ -24,8 +24,13 @@
 /* Configure your design tokens BEFORE loading any of your partials. */
 @use "variables" with (
   $max-content-width: {{ site.max_width | default: "930px" }},
-  /* Classic academic blue: 6.57:1 against white, above the WCAG AA 4.5:1 minimum. */
-  $purple-color: #0b5fa5,
+  /* Classic academic blue: 9.06:1 against white, well past the WCAG AA 4.5:1
+     minimum. The extra depth is deliberate. The theme sets the whole site in
+     Roboto Light (`body { font-weight: 300 }`) and only underlines links on
+     hover, so link colour is carrying the signal on its own with very thin
+     strokes; the previous #0b5fa5 measured a respectable 6.57:1 but still read
+     as washed out at that weight. */
+  $purple-color: #094a83,
   /* Lighter blue for dark mode: 7.53:1 against the #1c1c1d dark background. */
   $cyan-color: #6fb3e8
 );
