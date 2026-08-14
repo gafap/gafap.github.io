@@ -164,6 +164,17 @@
   overflow-y: auto;
 }
 
+/* Status note after the buttons on a publication entry (the `links_note` BibTeX
+   field, see _layouts/bib.liquid). Deliberately unlike the buttons beside it:
+   no border, no hover, muted and italic, so it reads as a remark rather than as
+   something to click. */
+.publications .links .links-note {
+  margin-left: 0.55rem;
+  font-size: 0.85rem;
+  font-style: italic;
+  color: var(--global-text-color-light);
+}
+
 /* ---------------------------------------------------------------------------
    CV page
    ---------------------------------------------------------------------------
