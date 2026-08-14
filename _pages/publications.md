@@ -5,23 +5,10 @@ title: Research
 description: Publications by categories in reversed chronological order.
 nav: true
 nav_order: 1
-# Page-scoped CSS (al-folio injects this as a <style> block on this page only).
-_styles: >
-  /* The page title and description are kept in the front matter above so the
-     navbar label and the page's SEO description still work, but they are not
-     shown on the page itself. */
-  .post-header {
-    display: none;
-  }
-
-  /* A bit more breathing room between the category sections. */
-  .post h2 {
-    margin-top: 2.75rem;
-  }
-
-  .post h2:first-of-type {
-    margin-top: 0.5rem;
-  }
+# No `_styles` block. This page used to hide its own header and set its own
+# heading margins, which is why it looked unlike the teaching and CV pages. The
+# heading spacing now lives in the shared type scale in assets/css/main.scss and
+# applies to every page, and the title is shown here just as it is elsewhere.
 ---
 
 <!-- Sections come from the BibTeX entry type in _bibliography/papers.bib, so

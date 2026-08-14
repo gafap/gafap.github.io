@@ -54,6 +54,59 @@
 @use "typograms";
 
 /* ---------------------------------------------------------------------------
+   Shared type scale
+   ---------------------------------------------------------------------------
+   ONE decision per level, applied to every page in the same rule. If a heading
+   or an entry title needs to change, it changes here and it changes everywhere.
+
+   Nothing below this block, and no page's `_styles`, should set a font-size or
+   font-weight for these levels again — that is exactly how the research, teaching
+   and CV pages drifted apart in the first place.
+
+     level 1  page title        2.5rem / 300   h1.post-title
+     level 2  section heading   2rem   / 300   h2, and the CV's .card-title
+     level 3  entry title       1rem   / 400   paper title, course, CV entry
+     level 4  entry detail      1rem   / 300   authors, journal, years, location
+     level 5  small print       0.875rem       abstracts, captions, badges
+
+   The one intentional exception is the name on the about page, which its own
+   `_styles` block sets to 2.1rem. It is a name, not a page title. */
+
+/* Level 2 — section headings. The CV template emits an <h3> tagged
+   `font-weight-medium`; both are overridden so it matches the <h2> headings it
+   sits level with on the research and teaching pages. */
+.post h2,
+.cv .card-title {
+  font-size: 2rem;
+  font-weight: 300;
+  line-height: 1.2;
+  margin-top: 2.75rem;
+  margin-bottom: 0.75rem;
+}
+
+.post h2:first-of-type,
+.cv .card:first-of-type .card-title {
+  margin-top: 0.5rem;
+}
+
+/* Level 3 — entry titles: a paper on the research page, a course on the teaching
+   page, a post or degree on the CV.
+
+   Weight is stated explicitly rather than left to `bolder` or <strong>. The
+   theme sets `.title { font-weight: bolder }`, which is relative: inherited from
+   the 300-weight body it resolves to 400, while the <strong> in a course row and
+   the `font-weight-bold` class on a CV entry both give 700. Same intent, three
+   different results. 400 is the value the research page has been rendering all
+   along, so that is the one kept. */
+.publications ol.bibliography li .title,
+.teaching-course,
+.cv h6.title {
+  font-size: 1rem;
+  font-weight: 400;
+  line-height: 1.4;
+}
+
+/* ---------------------------------------------------------------------------
    Site-specific tweaks (not part of the al-folio theme)
    --------------------------------------------------------------------------- */
 
@@ -211,17 +264,8 @@
     }
   }
 
-  /* Section heading. The template emits an <h3>, but this sits at the same level
-     as "Publications" / "Working Papers" on the research page and the
-     institution headings on the teaching page, both of which are <h2> at the
-     theme's 2rem. Match them rather than inventing a third size. */
-  .card-title {
-    margin-bottom: 0.9rem;
-    font-size: 2rem;
-    /* The template also tags it `font-weight-medium` (500), where every other
-       heading on the site is the theme's 300. Match the rest. */
-    font-weight: 300;
-  }
+  /* Section heading size and weight come from the shared type scale at the top
+     of this file, alongside the <h2> headings it sits level with. */
 
   /* The small tables used for the contact block and for the date/location
      column inside each entry. */
@@ -277,20 +321,25 @@
     }
   }
 
-  /* Entry title: 1rem bold, matching a publication title on the research page
-     and a course name on the teaching page. h6 is already 1rem in the theme, so
-     this only fixes the spacing beneath it. */
+  /* Entry title size and weight come from the shared type scale; only the
+     spacing beneath it is a CV-specific concern. */
   h6.title {
     margin-bottom: 0.15rem;
   }
 
-  /* The institution and field lines under an entry title. The rendercv templates
-     hard-code an inline font-size of 0.95rem on these, which is the only reason
-     the CV ran fractionally smaller than every other page. An inline style can
-     only be overridden with !important. */
+  /* Level 4 — the institution and field lines under an entry title. The rendercv
+     templates hard-code an inline font-size of 0.95rem on these, which is the
+     only reason the CV ran fractionally smaller than every other page. An inline
+     style can only be overridden with !important. */
   h6 {
     font-size: 1rem !important;
+    font-weight: 300;
     line-height: 1.4;
+  }
+
+  /* ...but not on the entry title, which the scale above sets to 400. */
+  h6.title {
+    font-weight: 400;
   }
 }
 
@@ -299,14 +348,14 @@
    ---------------------------------------------------------------------------
    Layout only. The arrangement is borrowed from
    https://gregveramendi.github.io/teaching.html — institution heading, then one
-   row per course with the years right-aligned — but every typographic choice is
-   left to the site's own styles, so the page reads the same as the research and
-   CV pages. The institution headings are plain <h2> elements with no class, and
-   nothing here sets a font, size, weight or colour of its own. */
+   row per course with the years right-aligned — but no font, size, weight or
+   colour is set here. Institutions are plain <h2> elements and course names
+   carry `.teaching-course`, both of which are typeset by the shared scale at the
+   top of this file, so they match the research and CV pages by construction.
 
-.teaching-section {
-  margin-bottom: 2.25rem;
-}
+   Section spacing also comes from that shared `.post h2` margin rather than from
+   a margin of its own, so the gap between institutions is the same as the gap
+   between "Publications" and "Working Papers" on the research page. */
 
 .teaching-list {
   margin: 0;
