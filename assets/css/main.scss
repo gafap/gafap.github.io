@@ -282,21 +282,15 @@
 /* ---------------------------------------------------------------------------
    Teaching page
    ---------------------------------------------------------------------------
-   Modelled on https://gregveramendi.github.io/teaching.html: the institution as
-   a coloured sub-heading, then one row per course with the course name on the
-   left, the years right-aligned and muted, and a hairline rule between rows. */
+   Layout only. The arrangement is borrowed from
+   https://gregveramendi.github.io/teaching.html — institution heading, then one
+   row per course with the years right-aligned — but every typographic choice is
+   left to the site's own styles, so the page reads the same as the research and
+   CV pages. The institution headings are plain <h2> elements with no class, and
+   nothing here sets a font, size, weight or colour of its own. */
 
 .teaching-section {
   margin-bottom: 2.25rem;
-}
-
-.teaching-institution {
-  margin-bottom: 0.75rem;
-  padding-bottom: 0.35rem;
-  border-bottom: 1px solid var(--global-divider-color);
-  font-size: 1.1rem;
-  font-weight: 600;
-  color: var(--global-theme-color);
 }
 
 .teaching-list {
@@ -317,23 +311,12 @@
   }
 }
 
-.teaching-course {
-  font-weight: 500;
-}
-
-.teaching-level {
-  margin-left: 0.35rem;
-  font-size: 0.85rem;
-  font-weight: 400;
-  font-style: italic;
-  color: var(--global-text-color-light);
-}
-
+/* Pushed to the right-hand edge of the row. Left at body colour and size on
+   purpose: a muted grey here would repeat the too-faint problem that the darker
+   accent and the Roboto Regular link weight were introduced to fix. */
 .teaching-years {
   flex-shrink: 0;
-  font-size: 0.9rem;
   text-align: right;
-  color: var(--global-text-color-light);
 }
 
 /* Stack the two halves on narrow screens rather than squeezing them. */
