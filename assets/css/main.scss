@@ -54,6 +54,33 @@
 @use "typograms";
 
 /* ---------------------------------------------------------------------------
+   Colour tokens
+   ---------------------------------------------------------------------------
+   Two site-wide decisions, so no page picks a colour of its own.
+
+   `--heading-accent` is the site's link blue, reused for section headings. It
+   is a separate token rather than `var(--global-theme-color)` written inline
+   twenty times, so headings could later be moved off the link colour by editing
+   one line.
+
+   Colour deliberately does NOT go on paper or course titles. A coloured 1rem
+   line above a row of buttons reads as clickable whatever hue it is, while a
+   2rem heading with no underline does not. Titles carry weight instead, level 3
+   below.
+
+   `--meta-color` is a neutral slate for venue, years and course level: 7.0:1 on
+   white and 8.1:1 on the dark background. The theme's own muted grey (#828282)
+   only manages 3.5:1, which is why it is not reused here. */
+:root {
+  --heading-accent: var(--global-theme-color);
+  --meta-color: #55606e;
+}
+
+html[data-theme='dark'] {
+  --meta-color: #9aa4b0;
+}
+
+/* ---------------------------------------------------------------------------
    Shared type scale
    ---------------------------------------------------------------------------
    ONE decision per level, applied to every page in the same rule. If a heading
@@ -64,8 +91,8 @@
    and CV pages drifted apart in the first place.
 
      level 1  page title        2.5rem / 700   h1.post-title
-     level 2  section heading   2rem   / 300   h2, and the CV's .card-title
-     level 3  entry title       1rem   / 400   paper title, course, CV entry
+     level 2  section heading   2rem   / 300   h2, and the CV's .card-title (accent)
+     level 3  entry title       1rem   / 500   paper title, course, CV entry
      level 4  entry detail      1rem   / 300   authors, journal, years, location
      level 5  small print       0.875rem       abstracts, captions, badges
 
@@ -85,7 +112,11 @@
 
 /* Level 2 — section headings. The CV template emits an <h3> tagged
    `font-weight-medium`; both are overridden so it matches the <h2> headings it
-   sits level with on the research and teaching pages. */
+   sits level with on the research and teaching pages.
+
+   These are the only elements that carry the accent colour. That covers the
+   research page's categories, the teaching page's institutions, the CV's cards
+   and the "News" heading on the homepage — one decision, every page. */
 .post h2,
 .cv .card-title {
   font-size: 2rem;
@@ -93,6 +124,7 @@
   line-height: 1.2;
   margin-top: 2.75rem;
   margin-bottom: 0.75rem;
+  color: var(--heading-accent);
 }
 
 .post h2:first-of-type,
@@ -107,14 +139,29 @@
    theme sets `.title { font-weight: bolder }`, which is relative: inherited from
    the 300-weight body it resolves to 400, while the <strong> in a course row and
    the `font-weight-bold` class on a CV entry both give 700. Same intent, three
-   different results. 400 is the value the research page has been rendering all
-   along, so that is the one kept. */
+   different results.
+
+   500, up from the 400 the research page rendered for a long time. Entry title,
+   authors and venue were all a shade of the same 1rem grey slab, and weight is
+   what separates them now that the title is deliberately left uncoloured. */
 .publications ol.bibliography li .title,
 .teaching-course,
 .cv h6.title {
   font-size: 1rem;
-  font-weight: 400;
+  font-weight: 500;
   line-height: 1.4;
+}
+
+/* Level 4, the muted half — where an entry was published rather than what it is:
+   the journal and year on the research page, the term and the (Graduate) /
+   (Undergraduate) tag on the teaching page. Same size as the title above it, set
+   in the neutral slate so each entry reads title, then authors, then venue,
+   darkest to lightest. Authors stay at body colour on purpose: they are names,
+   not filing detail. */
+.publications .periodical,
+.teaching-years,
+.teaching-level {
+  color: var(--meta-color);
 }
 
 /* ---------------------------------------------------------------------------
