@@ -118,6 +118,33 @@
   display: none !important;
 }
 
+/* The icon shows what the button will DO, not which theme is on: the moon in
+   light mode ("switch to dark"), the sun in dark mode ("switch to light"). The
+   theme does the opposite, showing the current state, so the two ids are
+   swapped here. Note the ids read backwards as a result — `#light-toggle-dark`
+   is the moon element, which now belongs to the light theme, and vice versa.
+   The `html` selector adds specificity to beat the theme's own rules, which are
+   written as `html[data-theme-setting="..."] { ... }`. */
+html[data-theme-setting='light'] {
+  #light-toggle-dark {
+    display: inline-block;
+  }
+
+  #light-toggle-light {
+    display: none;
+  }
+}
+
+html[data-theme-setting='dark'] {
+  #light-toggle-dark {
+    display: none;
+  }
+
+  #light-toggle-light {
+    display: inline-block;
+  }
+}
+
 /* The theme bolds only the first name in the navbar (`<span class="font-weight-bold">
    Gabriel</span> A. Facchini Palma`) and sets the rest in `font-weight-lighter`.
    Bold the whole name instead, to match the heading on the about page. */
