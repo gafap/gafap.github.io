@@ -508,6 +508,10 @@ body.sticky-bottom-footer > .container[role='main'] {
     white-space: normal;
     text-transform: none;
     text-align: left;
+    /* The template tags it `align-middle`, so this inline-block was centred on
+       the line rather than sitting on it, which is what kept the date 8px above
+       the title beside it however the line boxes were matched. */
+    vertical-align: baseline;
     color: var(--meta-color) !important;
     background-color: transparent !important;
   }
