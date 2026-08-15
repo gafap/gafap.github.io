@@ -212,10 +212,9 @@
   color: var(--global-text-color);
 }
 
-.news-scrollable {
-  max-height: 60vw;
-  overflow-y: auto;
-}
+/* The homepage news list deliberately has no scroll box of its own: the whole
+   page scrolls as one. `announcements.scrollable` in _pages/about.md is false,
+   so the `.news-scrollable` wrapper in _includes/news.liquid is never emitted. */
 
 /* Status note after the buttons on a publication entry (the `links_note` BibTeX
    field, see _layouts/bib.liquid). Deliberately unlike the buttons beside it:

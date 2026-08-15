@@ -93,7 +93,7 @@ al_folio:
 # -----------------------------------------------------------------------------
 
 navbar_fixed: true
-footer_fixed: true
+footer_fixed: false # false: the footer sits at the end of the page instead of being pinned over the content
 search_enabled: false # disables the Ctrl-K / Cmd-K site search overlay in the navbar
 socials_in_search: false
 posts_in_search: false

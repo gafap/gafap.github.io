@@ -24,7 +24,7 @@ _styles: >
 
 announcements:
   enabled: true # includes a list of news items
-  scrollable: true # adds a vertical scroll bar if there are more than 3 news items
+  scrollable: false # true would put the news in its own scroll box; false lets it flow with the page
   limit: 5 # leave blank to include all the news in the `_news` folder
 
 latest_posts:
