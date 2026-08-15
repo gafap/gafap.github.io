@@ -42,7 +42,7 @@ cv:
         location: Florence, Italy
         area: Economics
         studyType: PhD
-        end_date: 2017
+        date: 2017
         highlights:
           - "Committee: Andrea Ichino, Jérôme Adda, Joseph Doyle, Libertad González"
 
@@ -50,19 +50,19 @@ cv:
         location: Florence, Italy
         area: Economics
         studyType: MRes
-        end_date: 2013
+        date: 2013
 
       - institution: Universidad Nacional de La Plata
         location: La Plata, Argentina
         area: Economics
         studyType: MSc
-        end_date: 2011
+        date: 2011
 
       - institution: Universidad Nacional de Cuyo
         location: Mendoza, Argentina
         area: Economics
         studyType: BA
-        end_date: 2008
+        date: 2008
 
     Fields of Interest:
       - bullet: Applied Microeconomics, Political Economy, Health Economics, Development Economics

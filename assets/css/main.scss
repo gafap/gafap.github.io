@@ -547,6 +547,15 @@ body.sticky-bottom-footer > .container[role='main'] {
     text-align: left;
   }
 
+  /* The two columns of an entry sat a few pixels apart vertically: the left one
+     leads with a 0.875rem date, the right one with a 1rem title, and two line
+     boxes of different size starting at the same top edge do not put their text
+     on the same line. Aligning the flex items by baseline instead of by top edge
+     lines up the first line of each column, whatever their sizes. */
+  .list-group-item .row {
+    align-items: baseline;
+  }
+
   /* An award's `summary` — "2012-2016." under the awarder — is the one entry
      detail the templates print as a bare <p>. Slate, like every other detail. */
   .list-group-item .row p {
