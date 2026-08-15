@@ -63,7 +63,7 @@
    font-weight for these levels again — that is exactly how the research, teaching
    and CV pages drifted apart in the first place.
 
-     level 1  page title        2.5rem / 300   h1.post-title
+     level 1  page title        2.5rem / 700   h1.post-title
      level 2  section heading   2rem   / 300   h2, and the CV's .card-title
      level 3  entry title       1rem   / 400   paper title, course, CV entry
      level 4  entry detail      1rem   / 300   authors, journal, years, location
@@ -71,6 +71,17 @@
 
    The one intentional exception is the name on the about page, which its own
    `_styles` block sets to 2.1rem. It is a name, not a page title. */
+
+/* Level 1 — page titles: "Research", "Teaching", "CV", and the name on the about
+   page, all of which the theme prints as `<h1 class="post-title">`. Bold rather
+   than the theme's 300, so a page announces itself as firmly as the name does on
+   the homepage. The about page keeps its own 2.1rem size (see the `_styles` block
+   in _pages/about.md); only the weight comes from here. */
+.post-title {
+  font-size: 2.5rem;
+  font-weight: 700;
+  line-height: 1.2;
+}
 
 /* Level 2 — section headings. The CV template emits an <h3> tagged
    `font-weight-medium`; both are overridden so it matches the <h2> headings it
