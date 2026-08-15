@@ -539,6 +539,19 @@ body.sticky-bottom-footer > .container[role='main'] {
     transform: none;
   }
 
+  /* The Awards template builds its own date column and tags it `text-center`
+     without the `.date-column` class the Experience and Education templates use,
+     so it needs reaching by position: the left-hand column of any entry row. */
+  .list-group-item .row > div:first-child {
+    text-align: left;
+  }
+
+  /* An award's `summary` — "2012-2016." under the awarder — is the one entry
+     detail the templates print as a bare <p>. Slate, like every other detail. */
+  .list-group-item .row p {
+    color: var(--meta-color);
+  }
+
   /* Bullet points hanging off an entry (thesis committee, award details, ...).
      Entry detail, so body size — the same as the author and journal lines under
      a publication and the course rows on the teaching page. */
