@@ -164,6 +164,15 @@ html[data-theme='dark'] {
   color: var(--meta-color);
 }
 
+/* The journal name is an <em> inside `.periodical`, and the theme sets colour on
+   a blanket list of elements — `p, h1, ..., em, div, li, span, strong { color:
+   var(--global-text-color) }`. That paints the <em> directly rather than letting
+   it inherit, so without this the venue line came out half slate (the year) and
+   half black (the journal). */
+.publications .periodical em {
+  color: inherit;
+}
+
 /* ---------------------------------------------------------------------------
    Site-specific tweaks (not part of the al-folio theme)
    --------------------------------------------------------------------------- */
