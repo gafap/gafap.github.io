@@ -508,10 +508,11 @@ body.sticky-bottom-footer > .container[role='main'] {
     white-space: normal;
     text-transform: none;
     text-align: left;
-    /* The template tags it `align-middle`, so this inline-block was centred on
-       the line rather than sitting on it, which is what kept the date 8px above
-       the title beside it however the line boxes were matched. */
+    /* The template tags it `align-middle` and the theme gives `.badge` a
+       line-height of 1, so this inline-block was centred on a line box tighter
+       than the one beside it. Same rhythm, sitting on the baseline. */
     vertical-align: baseline;
+    line-height: 1.6;
     color: var(--meta-color) !important;
     background-color: transparent !important;
   }
@@ -626,6 +627,21 @@ body.sticky-bottom-footer > .container[role='main'] {
 
   h6:not(.title) {
     color: var(--meta-color);
+  }
+}
+
+/* The right-hand column of an entry carries `mt-2 mt-md-0`: 0.5rem of top margin
+   on a phone, where the columns stack, and none from 768px up, where they sit
+   side by side. The second half of that never worked — `.mt-2 { margin-top:
+   .5rem !important }` is printed after the `.mt-md-0` media block, so at equal
+   specificity it wins — and those 8px were what dropped every title below the
+   date beside it. Restored here, in the layer where those utilities live and at
+   the width they were meant for. */
+@layer components {
+  @media (min-width: 768px) {
+    .cv .list-group-item .row > div:last-child {
+      margin-top: 0 !important;
+    }
   }
 }
 
