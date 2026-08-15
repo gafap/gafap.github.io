@@ -424,15 +424,12 @@ body.sticky-bottom-footer > .container[role='main'] {
                             one-line bullets (Fields of Interest, Research,
                             Professional Service, Referee Service)
        div.card-text        label/details entries (Grants, Invited Seminars,
-                            Conference Presentations, Teaching)
-       .language-item       the Languages section, styled by an inline <style>
-                            block the template prints into the page
+                            Conference Presentations)
 
-     All three are given the same padding and the same hairline above them, so a
-     row is a row wherever it appears. */
+     Both are given the same padding and the same hairline above them, so a row
+     is a row wherever it appears. */
   .list-group-item,
-  div.card-text:not(:has(.language-item)),
-  .language-item {
+  div.card-text {
     padding: 0.85rem 0;
     border: 0;
     border-top: 1px solid var(--global-divider-color);
@@ -440,8 +437,7 @@ body.sticky-bottom-footer > .container[role='main'] {
 
   /* Nothing above the first row of a section. */
   .card > div > :first-child,
-  .card > div > ul:first-child > .list-group-item:first-child,
-  .language-item:first-child {
+  .card > div > ul:first-child > .list-group-item:first-child {
     border-top: 0;
   }
 
@@ -470,17 +466,10 @@ body.sticky-bottom-footer > .container[role='main'] {
     color: var(--meta-color);
   }
 
-  div.card-text > strong,
-  .language-item > strong {
+  div.card-text > strong {
     display: block;
     color: var(--global-text-color);
     font-weight: 500;
-  }
-
-  /* The Languages wrapper is a `.card-text` too, but it holds rows rather than
-     being one, so it keeps the colour and gives up the padding and the rule. */
-  div.card-text:has(.language-item) {
-    padding: 0;
   }
 
   /* Section heading size and weight come from the shared type scale at the top

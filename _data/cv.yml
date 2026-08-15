@@ -153,19 +153,18 @@ cv:
       - label: 2015
         details: 8th Italian Doctoral Workshop in Empirical Economics (Turin); 20th Conference - Associazione Italiana di Economia Sanitaria (Alghero); International Conference on Applied Research in Economics ICARE (Perm).
 
+    # Written as `bullet` entries, like Research and Fields of Interest, so the
+    # markdown link is rendered. A `details` string is printed raw, which is why
+    # the link to the teaching page used to show as literal markdown.
     Teaching:
-      - label: Professional recognition
-        details: Fellow of the Higher Education Academy (FHEA), Advance HE, UK - 2024.
-      - label: Courses
-        details: See the [teaching page](/teaching/) for the full list of courses taught at Royal Holloway, Universitat Autònoma de Barcelona and the European University Institute.
+      - bullet: See the [teaching page](/teaching/) for the full list of courses taught at Royal Holloway, Universitat Autònoma de Barcelona and the European University Institute.
+      - bullet: "Professional recognition: Fellow of the Higher Education Academy (FHEA), Advance HE, UK - 2024."
 
     Referee Service:
       - bullet: Review of Economic Studies, Economic Journal, Health Economics, Journal of Health Economics, Oxford Bulletin, Journal of Economic Behavior and Organization, European Economic Review, Frontiers in Behavioral Economics, Economics and Human Biology, Economic Modelling, Empirical Economics, European Journal of Population, Economic Policy, International Journal of Health Economics and Management.
 
+    # One line rather than one row per language: see the LOCAL CHANGE note in
+    # _includes/cv/render.liquid, which lets this section fall through to the
+    # generic renderer instead of the gem's row-per-language template.
     Languages:
-      - name: Spanish
-        summary: Native speaker
-      - name: English
-        summary: Fluent
-      - name: Italian
-        summary: Fluent
+      - bullet: Spanish (native), English (fluent), Italian (fluent).

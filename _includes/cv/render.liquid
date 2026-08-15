@@ -178,9 +178,12 @@
               {% elsif section_title == 'Skills' %}
                 {% assign entries = section_entries %}
                 {% include cv/skills.liquid %}
-              {% elsif section_title == 'Languages' %}
-                {% assign entries = section_entries %}
-                {% include cv/languages.liquid %}
+              {% comment %}
+                LOCAL CHANGE. The gem routes 'Languages' to cv/languages.liquid, which prints one
+                row per language and injects its own <style> block. Three languages do not warrant
+                three rows, so the section is left to fall through to the generic branch and is
+                written as a single `bullet` in _data/cv.yml.
+              {% endcomment %}
               {% elsif section_title == 'Interests' or section_title == 'Academic Interests' %}
                 {% assign entries = section_entries %}
                 {% include cv/interests.liquid %}
