@@ -40,28 +40,24 @@ cv:
     Education:
       - institution: European University Institute
         location: Florence, Italy
-        area: Economics
-        studyType: PhD
+        studyType: PhD in Economics
         date: 2017
         highlights:
           - "Committee: Andrea Ichino, Jérôme Adda, Joseph Doyle, Libertad González"
 
       - institution: European University Institute
         location: Florence, Italy
-        area: Economics
-        studyType: MRes
+        studyType: MRes in Economics
         date: 2013
 
       - institution: Universidad Nacional de La Plata
         location: La Plata, Argentina
-        area: Economics
-        studyType: MSc
+        studyType: MSc in Economics
         date: 2011
 
       - institution: Universidad Nacional de Cuyo
         location: Mendoza, Argentina
-        area: Economics
-        studyType: BA
+        studyType: BA in Economics
         date: 2008
 
     Fields of Interest:

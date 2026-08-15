@@ -200,7 +200,12 @@
                   the same two-column shape as Experience, Education and Awards: year in the left
                   column, an optional `title` in bold and `details` beneath it on the right. Word
                   labels ("Courses", "Professional recognition") keep the gem's inline form.
+
+                  An entry whose year repeats the one above it, or which has no year at all and so
+                  belongs with the entry above, is marked `same-year`. The stylesheet drops the rule
+                  above those rows, so a hairline separates years rather than every single entry.
                 {% endcomment %}
+                {% assign previous_label = '' %}
                 {% for entry in section_entries %}
                   {% if entry.bullet %}
                     <ul class="card-text font-weight-light list-group list-group-flush">
@@ -209,9 +214,19 @@
                   {% elsif entry.label or entry.title %}
                     {% assign label_text = entry.label | default: '' | strip %}
                     {% assign label_head = label_text | slice: 0 %}
+                    {% if forloop.first %}
+                      {% assign row_class = 'list-group-item' %}
+                    {% elsif label_text == '' or label_text == previous_label %}
+                      {% assign row_class = 'list-group-item same-year' %}
+                    {% else %}
+                      {% assign row_class = 'list-group-item' %}
+                    {% endif %}
+                    {% if label_text != '' %}
+                      {% assign previous_label = label_text %}
+                    {% endif %}
                     {% if entry.title or '0123456789' contains label_head %}
                       <ul class="card-text font-weight-light list-group list-group-flush">
-                        <li class="list-group-item">
+                        <li class="{{ row_class }}">
                           <div class="row">
                             <div class="col-xs-2 col-sm-2 col-md-2 text-center date-column">
                               <table class="table-cv">

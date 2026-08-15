@@ -453,6 +453,16 @@ body.sticky-bottom-footer > .container[role='main'] {
     border-top: 1px solid var(--global-divider-color);
   }
 
+  /* A rule marks a change of year, not the end of an entry. Rows the renderer
+     tagged `same-year` — a repeated year, or a blank one that belongs with the
+     entry above — close up under their neighbour instead. The selector carries
+     the same `ul ~ ul` structure as the rule above so that it outranks it. */
+  .card > div > ul ~ ul > .list-group-item.same-year:first-child,
+  .card > div > ul > .list-group-item.same-year {
+    border-top: 0;
+    padding-top: 0.15rem;
+  }
+
   /* Label/details rows read like every dated entry above them: the label leads
      in black at the entry-title weight, the detail follows in slate. The colon
      after the label comes from the template, not from the data. */
