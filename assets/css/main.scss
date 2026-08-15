@@ -513,10 +513,10 @@ body.sticky-bottom-footer > .container[role='main'] {
   }
 
   /* "Egham, UK" under the dates. */
+  /* "Egham, UK" under the dates. Its margin and line-height are set with the
+     rest of the column rhythm further down, so the two columns stay level. */
   .location {
-    margin: 0.4rem 0 0;
     font-size: 0.875rem;
-    line-height: 1.3;
     color: var(--meta-color);
   }
 
@@ -549,11 +549,31 @@ body.sticky-bottom-footer > .container[role='main'] {
 
   /* The two columns of an entry sat a few pixels apart vertically: the left one
      leads with a 0.875rem date, the right one with a 1rem title, and two line
-     boxes of different size starting at the same top edge do not put their text
-     on the same line. Aligning the flex items by baseline instead of by top edge
-     lines up the first line of each column, whatever their sizes. */
+     boxes of different height starting at the same top edge do not put their
+     text on the same line.
+
+     `align-items: baseline` on the row is the obvious fix and does not work
+     here: the left column's baseline has to come from the <table> the template
+     builds around the date, and a table does not expose the baseline of its
+     first row to the flex algorithm — measured in Chrome, it still left the
+     date 6px high.
+
+     So the columns are matched on line rhythm instead. Every first line of an
+     entry occupies the same 22.4px (1rem × 1.4, the entry title's line box),
+     whatever font size sits in it, and every second line starts 0.5rem below
+     it. Nothing then depends on how the browser resolves a table's baseline. */
   .list-group-item .row {
-    align-items: baseline;
+    align-items: flex-start;
+  }
+
+  .table-cv td {
+    font-size: 0.875rem;
+    line-height: 1.6; /* 0.875rem × 1.6 = 22.4px, the title's line box */
+  }
+
+  .location {
+    margin-top: 0.5rem; /* the h6 title's margin-bottom, so line 2 starts level */
+    line-height: 1.6;
   }
 
   /* An award's `summary` — "2012-2016." under the awarder — is the one entry
