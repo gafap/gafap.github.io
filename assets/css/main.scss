@@ -216,6 +216,19 @@
    page scrolls as one. `announcements.scrollable` in _pages/about.md is false,
    so the `.news-scrollable` wrapper in _includes/news.liquid is never emitted. */
 
+/* ---------------------------------------------------------------------------
+   Room under the fixed footer bar
+   ---------------------------------------------------------------------------
+   With `footer_fixed: true` the dark footer floats over the page, and the only
+   thing keeping content out from under it is the theme's `body { padding-bottom:
+   70px }`. On a phone the footer text wraps to two or three lines and grows past
+   that, which is how the last news item ended up hidden behind the bar. Reserve
+   more than the bar can ever need, and add the same clearance again as scroll
+   room so the page does not end flush against it. */
+body:not(.sticky-bottom-footer) {
+  padding-bottom: 8rem;
+}
+
 /* Status note after the buttons on a publication entry (the `links_note` BibTeX
    field, see _layouts/bib.liquid). Deliberately unlike the buttons beside it:
    no border, no hover, muted and italic, so it reads as a remark rather than as
