@@ -70,27 +70,39 @@ cv:
     Research:
       - bullet: See the [publications page](/publications/) for the full list of published papers, book chapters, working papers and work in progress.
 
+    # `label` is the year or year range and goes in the left column, `title` is the
+    # grant, `details` the role and amount — the same three parts as an Experience
+    # entry. Two entries have no year anywhere in the old text, so their left column
+    # is empty until one is filled in.
     Grants:
-      - label: Social Science Impact Accelerator - Residency
-        details: 2026. PI. £4,000.
-      - label: Social Science Impact Accelerator - Policy Support Fund
+      - label: 2026
+        title: Social Science Impact Accelerator - Residency
+        details: PI. £4,000.
+      - title: Social Science Impact Accelerator - Policy Support Fund
         details: PI. £2,500.
-      - label: Social Science Impact Accelerator - ECR Staff Public Engagement Bursaries
-        details: 2025. PI. £3,000.
-      - label: Gates Foundation-STEG Research Fund
+      - label: 2025
+        title: Social Science Impact Accelerator - ECR Staff Public Engagement Bursaries
+        details: PI. £3,000.
+      - title: Gates Foundation-STEG Research Fund
         details: "\"The First 1000 Days: Understanding Mothers' Decisions on Breastfeeding and Labour Participation\". Research Team. £25,000."
-      - label: Fundació La Caixa Social Research Call 2024 (EDUCARE)
+      - label: 2024
+        title: Fundació La Caixa Social Research Call (EDUCARE)
         details: Research Team. €115,000.
-      - label: European Commission, Horizon Europe, 2023-2026
+      - label: 2023-2026
+        title: European Commission, Horizon Europe
         details: "\"Flexible Approaches to Support Health through Financing\" (Grant n. 101095424). Research Team. €4,956,806.12."
-      - label: Ramón y Cajal Young Researcher Fellowship
-        details: Ministerio de Economía y Competitividad, 2022-2027. PI (desisted because of incompatibility with position in the UK).
-      - label: Proyectos I+D+i, Spanish Ministry of Science and Innovation
-        details: 2020-2022 (PID2019-104619RB-C43). Research Team. €14,000.
-      - label: General Secretariat for Research - Generalitat de Catalunya
-        details: 2017-2021 (SGR2017-1301). Research Team. €35,420.
-      - label: Research grant - Prize for Young Economist, Red Mercosur
-        details: 2009. PI. $4,000.
+      - label: 2022-2027
+        title: Ramón y Cajal Young Researcher Fellowship
+        details: Ministerio de Economía y Competitividad. PI (desisted because of incompatibility with position in the UK).
+      - label: 2020-2022
+        title: Proyectos I+D+i, Spanish Ministry of Science and Innovation
+        details: (PID2019-104619RB-C43). Research Team. €14,000.
+      - label: 2017-2021
+        title: General Secretariat for Research - Generalitat de Catalunya
+        details: (SGR2017-1301). Research Team. €35,420.
+      - label: 2009
+        title: Research grant - Prize for Young Economist, Red Mercosur
+        details: PI. $4,000.
 
     Awards:
       - title: Best Paper Award for Young Researchers
