@@ -1,0 +1,43 @@
+{% comment %}
+  LOCAL OVERRIDE of al_folio_core's _includes/footer.liquid.
+
+  The gem prints "© Copyright <year> <full name>. <footer_text>". This version keeps
+  the footer to a single short line — "© <year> <footer_text>" — dropping the word
+  "Copyright" and the repeated full name. Everything else (impressum, last-updated,
+  newsletter, fixed vs sticky footer) is unchanged from the gem.
+
+  After `bundle update` of al_folio_core, compare against the gem's version with:
+    bundle exec al-folio upgrade overrides diff _includes/footer.liquid
+{% endcomment %}
+
+{% capture footer_contents %}
+  &copy; {{ site.time | date: '%Y' }} {{ site.footer_text }}
+  {% if site.impressum_path %}
+    <a href="{{ site.url }}{{ site.baseurl }}{{ site.impressum_path }}">Impressum</a>.
+  {% endif %}
+  {% if site.last_updated %}
+    Last updated: {{ 'now' | date: '%B %d, %Y' }}.
+  {% endif %}
+{% endcapture %}
+
+{% if site.footer_fixed %}
+  <footer class="fixed-bottom" role="contentinfo">
+    <div class="container mt-0">
+      {{ footer_contents }}
+    </div>
+  </footer>
+{% else %}
+  <footer class="sticky-bottom mt-5" role="contentinfo">
+    {% if site.newsletter.enabled %}
+      {% if site.plugins contains 'al_newsletter' %}
+        {% include plugins/al_newsletter_form_center.liquid %}
+      {% else %}
+        {% include newsletter.liquid %}
+      {% endif %}
+    {% endif %}
+
+    <div class="container">
+      {{ footer_contents }}
+    </div>
+  </footer>
+{% endif %}
