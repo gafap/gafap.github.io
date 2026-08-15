@@ -217,16 +217,54 @@
    so the `.news-scrollable` wrapper in _includes/news.liquid is never emitted. */
 
 /* ---------------------------------------------------------------------------
-   Room under the fixed footer bar
+   Footer bar
    ---------------------------------------------------------------------------
-   With `footer_fixed: true` the dark footer floats over the page, and the only
-   thing keeping content out from under it is the theme's `body { padding-bottom:
-   70px }`. On a phone the footer text wraps to two or three lines and grows past
-   that, which is how the last news item ended up hidden behind the bar. Reserve
-   more than the bar can ever need, and add the same clearance again as scroll
-   room so the page does not end flush against it. */
-body:not(.sticky-bottom-footer) {
-  padding-bottom: 8rem;
+   `footer_fixed` is false, so the footer is an ordinary element at the end of
+   the document: it is out of sight at the top of a page and appears only once
+   you scroll to the end, as on pablobrugarolas.github.io. It keeps the dark-bar
+   look of the pinned version, which the theme only applies to
+   `footer.fixed-bottom` — hence the rules below, which restate that appearance
+   for `footer.sticky-bottom` and drop the theme's pale divider line and its
+   40px of padding.
+
+   On a page too short to scroll, an in-flow footer would otherwise sit straight
+   under the content with blank page beneath it. The flex column plus
+   `margin-top: auto` pushes it down to the bottom of the window instead, so the
+   bar always ends the page whether or not the content fills the screen. */
+body.sticky-bottom-footer {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+footer.sticky-bottom {
+  margin-top: auto !important; /* beats the .mt-5 utility the theme puts on the element */
+  border-top: 0;
+  padding-top: 9px;
+  padding-bottom: 8px;
+  background-color: var(--global-footer-bg-color);
+  font-size: 0.75rem;
+
+  .container {
+    color: var(--global-footer-text-color);
+    text-align: center;
+  }
+
+  a {
+    color: var(--global-footer-link-color);
+
+    &:hover {
+      color: var(--global-theme-color);
+      text-decoration: none;
+    }
+  }
+}
+
+/* Space between the last thing on the page and the bar, in place of the `mt-5`
+   margin that `margin-top: auto` above replaces. Padding on the content rather
+   than margin on the footer, so it survives being pushed to the window bottom. */
+body.sticky-bottom-footer > .container[role='main'] {
+  padding-bottom: 5rem;
 }
 
 /* Status note after the buttons on a publication entry (the `links_note` BibTeX
