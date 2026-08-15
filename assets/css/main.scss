@@ -476,9 +476,21 @@ body.sticky-bottom-footer > .container[role='main'] {
     color: var(--meta-color);
   }
 
+  /* The pin belongs to the line of text it sits in, so it takes that line's
+     colour. The CV gem's own stylesheet paints it with the accent
+     (`i.iconlocation { color: var(--global-theme-color) }` in al-folio-cv.css,
+     which loads after this file); a class-plus-class selector outranks it. */
   .iconlocation {
     margin-right: 0.3rem;
     font-size: 0.875rem;
+    color: var(--meta-color);
+  }
+
+  /* Dates and location flush left, like the rows on the teaching page, rather
+     than centred in their column. `text-center` on the element is a plain
+     Tailwind utility, and unlayered rules beat layered ones. */
+  .date-column {
+    text-align: left;
   }
 
   /* Bullet points hanging off an entry (thesis committee, award details, ...).
