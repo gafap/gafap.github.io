@@ -396,6 +396,17 @@ body.sticky-bottom-footer > .container[role='main'] {
    Bootstrap compat layer back on. */
 
 .cv {
+  /* Sections are flat, as on every other page. The rendercv template wraps each
+     one in `.card`, which the theme paints as a panel: background, border and
+     shadow. Stripped here, a CV section becomes a blue heading over hairline-
+     separated rows — the same shape as an institution on the teaching page or a
+     category on the research page. */
+  .card {
+    background: none;
+    border: 0;
+    box-shadow: none;
+  }
+
   /* Entry lists: the theme colours `.list-group-item` but never gives it the
      base list reset, padding or separator that Bootstrap would have. */
   .list-group {
@@ -435,22 +446,34 @@ body.sticky-bottom-footer > .container[role='main'] {
     }
   }
 
-  /* Date badge and location, both small print: 0.875rem is the size the theme
-     already uses for secondary text elsewhere (.post-description, .caption, and
-     the abstract/BibTeX blocks on the research page). */
-  .badge {
-    padding: 0.35em 0.6em;
+  /* Dates and location, both small print: 0.875rem is the size the theme already
+     uses for secondary text elsewhere (.post-description, .caption, and the
+     abstract/BibTeX blocks on the research page).
+
+     The template tags the years as a `.badge`, which the theme fills solid with
+     the accent colour — the only solid-filled element anywhere on the site, and
+     shouting next to the muted years on the teaching page. Here they are plain
+     slate text like every other date on the site. The theme's fill carries
+     !important, so beating it needs the same specificity and !important back;
+     `text-uppercase` on the element is a plain Tailwind utility, so normal-case
+     needs no such help. */
+  .card .list-group-item .badge {
+    padding: 0;
     font-size: 0.875rem;
+    font-weight: 400;
     letter-spacing: 0.02em;
     white-space: normal;
+    text-transform: none;
+    color: var(--meta-color) !important;
+    background-color: transparent !important;
   }
 
-  /* "Egham, UK" under the date badge. */
+  /* "Egham, UK" under the dates. */
   .location {
     margin: 0.4rem 0 0;
     font-size: 0.875rem;
     line-height: 1.3;
-    color: var(--global-text-color-light);
+    color: var(--meta-color);
   }
 
   .iconlocation {
@@ -472,7 +495,7 @@ body.sticky-bottom-footer > .container[role='main'] {
 
     .item {
       font-size: 1rem;
-      color: var(--global-text-color-light);
+      color: var(--meta-color);
     }
   }
 
@@ -485,16 +508,32 @@ body.sticky-bottom-footer > .container[role='main'] {
   /* Level 4 — the institution and field lines under an entry title. The rendercv
      templates hard-code an inline font-size of 0.95rem on these, which is the
      only reason the CV ran fractionally smaller than every other page. An inline
-     style can only be overridden with !important. */
+     style can only be overridden with !important.
+
+     Slate, like the journal and year under a paper: an entry reads title, then
+     where it happened, darkest to lightest. The `:not(.title)` guard keeps the
+     entry title itself at body colour and at the weight the shared scale sets. */
   h6 {
     font-size: 1rem !important;
     font-weight: 300;
     line-height: 1.4;
   }
 
-  /* ...but not on the entry title, which the scale above sets to 400. */
-  h6.title {
-    font-weight: 400;
+  h6:not(.title) {
+    color: var(--meta-color);
+  }
+}
+
+/* The card wrapper also carries Tailwind's `mt-3 p-3` utilities, whose padding
+   would leave the CV's content indented 1rem further than every other page now
+   that the panel around it is gone. Those utilities are `!important` inside
+   `@layer components`, and for important declarations the cascade reverses layer
+   order — an unlayered override loses however specific it is. Joining the same
+   layer puts the two on equal footing, where `.cv .card` simply outranks `.p-3`. */
+@layer components {
+  .cv .card {
+    margin-top: 0 !important;
+    padding: 0 !important;
   }
 }
 
