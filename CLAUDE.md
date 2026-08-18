@@ -118,7 +118,8 @@ YouTube, Spotify, Bandcamp. It renders as the last button in the row.
 Two things to keep in step with it:
 
 - The one-line explanation at the foot of `_pages/publications.md` is what stops a lone music note
-  being baffling. **If no paper carries a `song` any more, delete that line too.**
+  being baffling. It is **commented out** while no paper has a song — uncomment it with the first
+  one, and comment it out again if the last one ever goes.
 - The note is styled by `.publications-footnote` and the button by `.publications .links .btn.song`,
   both in `assets/css/main.scss`. Neither sets a colour — the button inherits the same styling as
   every other button on the site.

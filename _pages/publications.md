@@ -46,10 +46,14 @@ nav_order: 1
 {% bibliography --query @unpublished %}
 </div>
 
-<!-- A music note on an entry is unexplained otherwise. Only shown once, at the
-     foot of the page, and only worth keeping while at least one paper carries a
-     `song` field in _bibliography/papers.bib. -->
+<!-- The note explaining the music-note button, commented out until the first
+     paper actually carries a `song` field in _bibliography/papers.bib — until
+     then it would promise something the page does not show. Uncomment it with
+     the first song, and comment it out again if the last one ever goes.
+
 <p class="publications-footnote">
   Some papers carry a <i class="fa-solid fa-music" aria-hidden="true"></i> — a song that fits the
   paper. A paper takes years to finish, which is worth a small celebration.
 </p>
+
+-->
