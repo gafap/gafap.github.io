@@ -95,7 +95,13 @@
               {% if cv.email %}
                 <tr>
                   <td class="p-1 pr-2 font-weight-bold"><b>Email</b></td>
-                  <td class="p-1 pl-2 font-weight-light">{{ cv.email }}</td>
+                  {% comment %}
+                    LOCAL OVERRIDE: the gem prints the address as plain text. It is a
+                    link here so the row behaves like the Website row below it.
+                  {% endcomment %}
+                  <td class="p-1 pl-2 font-weight-light">
+                    <a href="mailto:{{ cv.email }}">{{ cv.email }}</a>
+                  </td>
                 </tr>
               {% endif %}
               {% if cv.phone %}

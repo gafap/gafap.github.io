@@ -68,18 +68,20 @@ cv:
 
     # `label` is the year or year range and goes in the left column, `title` is the
     # grant, `details` the role and amount — the same three parts as an Experience
-    # entry. Two entries have no year anywhere in the old text, so their left column
-    # is empty until one is filled in.
+    # entry. Every entry has a `label`; leaving one out empties the left column and
+    # makes the entry group under the one above it.
     Grants:
       - label: 2026
         title: Social Science Impact Accelerator - Residency
         details: PI. £4,000.
-      - title: Social Science Impact Accelerator - Policy Support Fund
+      - label: 2026
+        title: Social Science Impact Accelerator - Policy Support Fund
         details: PI. £2,500.
       - label: 2025
         title: Social Science Impact Accelerator - ECR Staff Public Engagement Bursaries
         details: PI. £3,000.
-      - title: Gates Foundation-STEG Research Fund
+      - label: 2025
+        title: Gates Foundation-STEG Research Fund
         details: "\"The First 1000 Days: Understanding Mothers' Decisions on Breastfeeding and Labour Participation\". Research Team. £25,000."
       - label: 2024
         title: Fundació La Caixa Social Research Call (EDUCARE)

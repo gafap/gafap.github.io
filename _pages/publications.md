@@ -2,10 +2,9 @@
 layout: page
 permalink: /publications/
 title: Research
-# Describes what this page actually contains: the sections below are the four
-# BibTeX entry types, and `order: descending` in _config.yml sorts each newest
-# first. This line is also the page's SEO description.
-description: Journal articles, book chapters and working papers, most recent first.
+# No `description:`. Teaching and CV have none either, so the three pages share
+# the same header shape: title only. Adding a line here would also become the
+# page's SEO description.
 nav: true
 nav_order: 1
 # No `_styles` block. This page used to hide its own header and set its own
