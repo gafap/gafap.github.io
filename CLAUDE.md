@@ -65,6 +65,69 @@ change what the page shows.
 
 Coauthor names become links if the person is listed in `_data/coauthors.yml`.
 
+### Add a button next to +abstract and +bib
+
+The little grey boxes under a paper are all generated from BibTeX fields. **Most of the time you do
+not need to touch any template** — the field already exists and you just add it to the entry in
+`papers.bib`. These are every button the template can already produce, in the order they appear on
+the page:
+
+| Add this field | Button you get | Notes |
+| -------------- | -------------- | ----- |
+| `award`        | **+awarded**   | Expands the award text. `award_name` renames the button. |
+| `abstract`     | **+abstract**  | Expands the abstract. |
+| `doi`          | **journal**    | Just the DOI, no `https://doi.org/` prefix. |
+| `arxiv`        | **arXiv**      | The arXiv ID only. |
+| `hal`          | **HAL**        | The HAL ID only. |
+| `bibtex_show`  | **+bib**       | Set it to `{true}`. |
+| `html`         | **HTML**       | Full URL, or a bare filename found in `assets/html/`. |
+| `pdf`          | **WP**         | Full URL, or a bare filename found in `assets/pdf/`. `pdf_label` renames the button. |
+| `supp`         | **Supp**       | Supplementary material. Full URL or a filename in `assets/pdf/`. |
+| `video`        | **Video**      | Opens the link in a new tab (`enable_video_embedding` is `false`). |
+| `blog`         | **Blog**       | Full URL. |
+| `code`         | **Code**       | Full URL — a GitHub repo, say. |
+| `poster`       | **Poster**     | Full URL or a filename in `assets/pdf/`. |
+| `slides`       | **Slides**     | Full URL or a filename in `assets/pdf/`. |
+| `website`      | **Website**    | Full URL — a project page. |
+
+So a **Slides** button is one line in the entry, nothing more:
+
+```bibtex
+slides = {my-talk.pdf},
+```
+
+with `my-talk.pdf` dropped into `assets/pdf/`.
+
+The naming convention on this site: **a `+` prefix means the button expands text underneath the
+entry; no prefix means it navigates away.** Keep that distinction if you add anything new.
+
+#### A button that does not exist yet
+
+Only if none of the above fits — say a **Data** button for a replication archive. Three steps, all
+required:
+
+1. In `_layouts/bib.liquid`, inside the `<!-- Links/Buttons -->` block, copy an existing simple case
+   (the `code` one is the shortest) and change the field name and label:
+
+   ```liquid
+   {% if entry.data %}
+     <a href="{{ entry.data }}" class="btn btn-sm z-depth-0" role="button">Data</a>
+   {% endif %}
+   ```
+
+   Its position in that block is its position on the page.
+
+2. Add `data,` to the `filtered_bibtex_keywords` list in `_config.yml`, keeping the list
+   alphabetical. **Skipping this is the classic mistake**: the field is not real BibTeX, so without
+   it the raw `data = {...}` line leaks into what the **+bib** button shows.
+
+3. Note the addition in the comment block at the top of `bib.liquid`, which is the running list of
+   how this file differs from the gem's version. That comment is what makes the next theme upgrade
+   survivable.
+
+Do not style the button. `btn btn-sm z-depth-0` is the theme's own class set and every button on the
+site already uses it.
+
 ### Add a news item
 
 News appears on the homepage. One file per item in `_news/`, named `YYYY-MM-DD-short-slug.md`:
