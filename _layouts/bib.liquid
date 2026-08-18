@@ -26,6 +26,10 @@
      buttons — used for notes like "new version coming soon". It is listed in
      `filtered_bibtex_keywords` in _config.yml so it does not leak into +bib.
 
+  4. A new optional `song` BibTeX field (with `song_title` for the hover text),
+     rendered as the last button in the row: a music note linking to a song that
+     fits the paper. Both keys are listed in `filtered_bibtex_keywords` too.
+
   After `bundle update` of al_folio_core, compare against the gem's version with:
     bundle exec al-folio upgrade overrides diff _layouts/bib.liquid
 {% endcomment %}
@@ -255,6 +259,25 @@
       {% endif %}
       {% if entry.website %}
         <a href="{{ entry.website }}" class="btn btn-sm z-depth-0" role="button">Website</a>
+      {% endif %}
+      {% comment %}
+        LOCAL ADDITION: an optional song that fits the paper, as a music-note
+        button. `song` is the URL; `song_title` is the optional hover text and
+        falls back to "Song". Both are in `filtered_bibtex_keywords` in
+        _config.yml so they stay out of the +bib output. Last in the row on
+        purpose — it is a garnish, not one of the paper's resources.
+      {% endcomment %}
+      {% if entry.song %}
+        {% assign song_label = entry.song_title | default: 'Song' %}
+        <a
+          href="{{ entry.song }}"
+          class="btn btn-sm z-depth-0 song"
+          role="button"
+          title="{{ song_label }}"
+          aria-label="Listen: {{ song_label }}"
+        >
+          <i class="fa-solid fa-music" aria-hidden="true"></i>
+        </a>
       {% endif %}
       {% comment %}
         LOCAL ADDITION: a short status note sitting after the buttons, for things

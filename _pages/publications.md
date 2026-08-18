@@ -45,3 +45,11 @@ nav_order: 1
 <div class="publications">
 {% bibliography --query @unpublished %}
 </div>
+
+<!-- A music note on an entry is unexplained otherwise. Only shown once, at the
+     foot of the page, and only worth keeping while at least one paper carries a
+     `song` field in _bibliography/papers.bib. -->
+<p class="publications-footnote">
+  Some papers carry a <i class="fa-solid fa-music" aria-hidden="true"></i> — a song that fits the
+  paper. A paper takes years to finish, which is worth a small celebration.
+</p>

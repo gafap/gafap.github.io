@@ -383,6 +383,26 @@ body.sticky-bottom-footer > .container[role='main'] {
   color: var(--global-text-color-light);
 }
 
+/* The song button on a publication entry (the `song` BibTeX field, see
+   _layouts/bib.liquid). It is the one icon-only button in the row, so it gets
+   slightly wider side padding than the text buttons — otherwise Bootstrap's
+   `.btn-sm` padding, which is tuned for a word, leaves the single narrow glyph
+   looking pinched. No colour and no size of its own: it inherits the button
+   styling every other button on the site already uses. */
+.publications .links .btn.song {
+  padding-left: 0.6rem;
+  padding-right: 0.6rem;
+}
+
+/* The one-line note at the foot of the research page explaining the music note.
+   Small print (level 5 of the shared type scale) and muted, so it sits below the
+   entries rather than competing with them. */
+.publications-footnote {
+  margin-top: 2.5rem;
+  font-size: 0.875rem;
+  color: var(--meta-color);
+}
+
 /* ---------------------------------------------------------------------------
    CV page
    ---------------------------------------------------------------------------

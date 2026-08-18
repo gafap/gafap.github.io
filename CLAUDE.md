@@ -89,6 +89,7 @@ the page:
 | `poster`       | **Poster**     | Full URL or a filename in `assets/pdf/`. |
 | `slides`       | **Slides**     | Full URL or a filename in `assets/pdf/`. |
 | `website`      | **Website**    | Full URL — a project page. |
+| `song`         | 🎵 (music note) | A song that fits the paper. `song_title` sets the hover text. See below. |
 
 So a **Slides** button is one line in the entry, nothing more:
 
@@ -100,6 +101,27 @@ with `my-talk.pdf` dropped into `assets/pdf/`.
 
 The naming convention on this site: **a `+` prefix means the button expands text underneath the
 entry; no prefix means it navigates away.** Keep that distinction if you add anything new.
+
+#### The song button
+
+Some papers carry a music note linking to a song that fits them. Two fields, and only `song` is
+required:
+
+```bibtex
+song       = {https://www.youtube.com/watch?v=dQw4w9WgXcQ},
+song_title = {Talking Heads — Road to Nowhere},
+```
+
+`song_title` is the hover text; leave it out and the tooltip just reads "Song". Any URL works —
+YouTube, Spotify, Bandcamp. It renders as the last button in the row.
+
+Two things to keep in step with it:
+
+- The one-line explanation at the foot of `_pages/publications.md` is what stops a lone music note
+  being baffling. **If no paper carries a `song` any more, delete that line too.**
+- The note is styled by `.publications-footnote` and the button by `.publications .links .btn.song`,
+  both in `assets/css/main.scss`. Neither sets a colour — the button inherits the same styling as
+  every other button on the site.
 
 #### A button that does not exist yet
 

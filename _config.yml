@@ -408,6 +408,8 @@ filtered_bibtex_keywords:
     preview,
     selected,
     slides,
+    song,
+    song_title,
     supp,
     video,
     website,
