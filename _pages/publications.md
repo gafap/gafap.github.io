@@ -51,5 +51,6 @@ nav_order: 1
      page does not show. -->
 <p class="publications-footnote">
   Some papers carry a <i class="fa-solid fa-music" aria-hidden="true"></i> — a song that fits the
-  paper. A paper takes years to finish, which is worth a small celebration.
+  paper. An idea shamelessly stolen from my coauthor
+  <a href="https://www.antonidemoragas.eu">Antoni-Italo de Moragas</a>.
 </p>
