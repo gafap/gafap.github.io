@@ -46,14 +46,10 @@ nav_order: 1
 {% bibliography --query @unpublished %}
 </div>
 
-<!-- The note explaining the music-note button, commented out until the first
-     paper actually carries a `song` field in _bibliography/papers.bib — until
-     then it would promise something the page does not show. Uncomment it with
-     the first song, and comment it out again if the last one ever goes.
-
+<!-- Explains the music-note button. Comment this out again if the last `song`
+     field ever leaves _bibliography/papers.bib, or it promises something the
+     page does not show. -->
 <p class="publications-footnote">
   Some papers carry a <i class="fa-solid fa-music" aria-hidden="true"></i> — a song that fits the
   paper. A paper takes years to finish, which is worth a small celebration.
 </p>
-
--->
