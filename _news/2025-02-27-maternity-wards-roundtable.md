@@ -5,4 +5,4 @@ inline: true
 related_posts: false
 ---
 
-Organized and hosted the [Round table "Staffing in Maternity Wards"](https://www.royalholloway.ac.uk/research-and-education/collaborate-with-us/social-science-impact-accelerator/impact-blog/staffing-in-maternity-wards/) at the University of London.
+Organized and hosted the [Round table "Staffing in Maternity Wards"](https://www.royalholloway.ac.uk/research-and-education/collaborate-with-us/social-science-impact-accelerator/impact-blog/staffing-in-maternity-wards/) at Senate House, University of London.
