@@ -20,7 +20,7 @@ nav_order: 2
 <ul class="teaching-list">
   <li class="teaching-item">
     <span><span class="teaching-course">Inequality, Development and Health</span> <span class="teaching-level">(Graduate)</span></span>
-    <span class="teaching-years">Spring 2024&ndash;2025</span>
+    <span class="teaching-years">Spring 2024&ndash;2026</span>
   </li>
   <li class="teaching-item">
     <span><span class="teaching-course">Applied Economics and Policy</span> <span class="teaching-level">(Undergraduate)</span></span>
@@ -28,7 +28,7 @@ nav_order: 2
   </li>
   <li class="teaching-item">
     <span><span class="teaching-course">Economics of Development</span> <span class="teaching-level">(Undergraduate)</span></span>
-    <span class="teaching-years">Fall 2023</span>
+    <span class="teaching-years">Fall 2023, Spring 2026</span>
   </li>
 </ul>
 
