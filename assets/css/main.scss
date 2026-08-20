@@ -447,18 +447,26 @@ body.sticky-bottom-footer > .container[role='main'] {
                             Conference Presentations)
 
      Both are given the same padding and the same hairline above them, so a row
-     is a row wherever it appears. */
+     is a row wherever it appears.
+
+     0.45rem top and bottom, so consecutive rows sit 0.9rem apart. It was twice
+     that, which put as much air between two jobs as between a section heading
+     and its first entry, and a section stopped reading as one list. The gap
+     below the heading is held where it was by the first-row rule underneath. */
   .list-group-item,
   div.card-text {
-    padding: 0.85rem 0;
+    padding: 0.45rem 0;
     border: 0;
     border-top: 1px solid var(--global-divider-color);
   }
 
-  /* Nothing above the first row of a section. */
+  /* Nothing above the first row of a section, and the fuller padding the rows
+     used to carry, so tightening the rhythm between entries does not also pull
+     the first entry up under its heading. */
   .card > div > :first-child,
   .card > div > ul:first-child > .list-group-item:first-child {
     border-top: 0;
+    padding-top: 0.85rem;
   }
 
   /* ...but the generic renderer wraps EVERY bullet in a <ul> of its own, so each
