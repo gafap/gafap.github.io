@@ -212,6 +212,37 @@ html[data-theme-setting='dark'] {
   }
 }
 
+/* ---------------------------------------------------------------------------
+   The name on the homepage
+   ---------------------------------------------------------------------------
+   The <h1> spells out the site's own domain: **G**abriel **A**. **Fa**cchini
+   **P**alma. Those five letters keep the full-strength ink and the bold weight
+   the whole name used to carry; everything around them steps back to
+   `--meta-color` at weight 300 — the same slate the site already uses for years
+   and venues, so no new colour enters the palette.
+
+   Two signals rather than one. Weight alone is too quiet to read as deliberate
+   at this size, and colour alone leaves the name looking half-faded; together
+   the five letters clearly belong to each other. The emphasis is on the letters
+   and the *surroundings* are muted, which is why this does not put colour on a
+   title in the sense the design rules forbid.
+
+   The fragments are marked up in `_layouts/about.liquid`. The size of this
+   heading is the one typographic setting that lives elsewhere — `_pages/about.md`
+   sets it to 2.1rem, the sanctioned exception to the shared scale.
+
+   Deliberately not applied to the navbar copy of the name (the rule below): at
+   0.9rem the fragments would be too small to register as anything but noise. */
+.post-title .name-gafap {
+  font-weight: 300;
+  color: var(--meta-color);
+}
+
+.post-title .name-gafap b {
+  font-weight: 700;
+  color: var(--global-text-color);
+}
+
 /* The theme bolds only the first name in the navbar (`<span class="font-weight-bold">
    Gabriel</span> A. Facchini Palma`) and sets the rest in `font-weight-lighter`.
    Bold the whole name instead, to match the heading on the about page. */

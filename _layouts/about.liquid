@@ -8,7 +8,9 @@ layout: default
   1. The profile photo block is moved ABOVE the <header>, so that the floated
      image sits alongside the name, subtitle and bio rather than only alongside
      the bio. (A float only affects content that comes after it in the markup.)
-  2. The whole name is bold, instead of just the first name.
+  2. The name is written out rather than assembled from site.first_name /
+     middle_name / last_name, so that the GAFAP letters inside it can be picked
+     out. See the comment at the <h1>.
   3. An optional second photo for dark mode: set `profile.image_dark` in the
      page front matter and it replaces `profile.image` whenever the dark theme
      is active. Both are rendered and one is hidden with the theme's existing
@@ -74,7 +76,19 @@ layout: default
     <header class="post-header">
       <h1 class="post-title">
         {% if site.title == 'blank' %}
-          <span class="font-weight-bold">{{ site.first_name }} {{ site.middle_name }} {{ site.last_name }}</span>
+          {% comment %}
+            GAFAP -- the five letters of this site's domain, picked out of the name.
+            The fragments are written out rather than sliced from site.first_name /
+            middle_name / last_name, because where they fall is particular to this
+            name and no Liquid filter expresses it. If the name in _config.yml ever
+            changes, change this line with it.
+
+            <b> rather than <span>: the fragments still read as emphasis if the
+            stylesheet fails to load, and the selectable text is unchanged, so
+            copy-paste and screen readers still give "Gabriel A. Facchini Palma".
+            Styled by .name-gafap in assets/css/main.scss.
+          {% endcomment %}
+          <span class="name-gafap"><b>G</b>abriel <b>A</b>. <b>Fa</b>cchini <b>P</b>alma</span>
         {% else %}
           {{ site.title }}
         {% endif %}
