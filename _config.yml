@@ -119,11 +119,17 @@ max_width: 930px
 # from the page's own title. Nothing further to fill in.
 serve_og_meta: true # Include Open Graph meta tags in the HTML head
 serve_schema_org: true # Include Schema.org in the HTML head
-# The site-wide default preview image. Needs a real file at this path before it
-# does anything -- see the TODO in CLAUDE.md §8. Facebook/LinkedIn want 1200x630;
-# prof_pic.jpg is square (1200x1200) so it needs cropping rather than copying, or
-# it will be letterboxed in the card.
-og_image: # /assets/img/og_preview.png
+# The site-wide default preview image: the card people see when the URL is pasted
+# into LinkedIn, Bluesky, Slack or a mail client. 1200x630, the size those all
+# expect -- prof_pic.jpg is square, so it could not simply be reused here or the
+# card would letterbox it.
+#
+# It is a composition, not a photo: name, title, institution and field beside the
+# photo, in the site's own two colours (#094a83 and #55606e, the same tokens as
+# assets/css/main.scss). To regenerate after changing the photo or the job title,
+# the script is in the commit that added the file -- `git log --diff-filter=A --
+# assets/img/og_preview.png`.
+og_image: /assets/img/og_preview.png
 
 # -----------------------------------------------------------------------------
 # Analytics and search engine verification

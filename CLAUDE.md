@@ -362,11 +362,7 @@ well as the folder.
 1. **`robots.txt` blocks all search engines.** It has `Disallow: /` and the `Sitemap:` line is
    commented out. **Revert both**, or the site will never appear in Google. The file itself carries
    instructions on how.
-2. **`og_image` in `_config.yml` has no file behind it.** `serve_og_meta` and `serve_schema_org` are
-   already on, so link previews work, but with no image. Make a **1200×630** PNG at
-   `assets/img/og_preview.png` and uncomment the path. `prof_pic.jpg` is square (1200×1200), so it
-   needs cropping, not copying, or the card letterboxes it.
-3. **Re-check the noindex tag still renders.** It comes from the `page.noindex` block in
+2. **Re-check the noindex tag still renders.** It comes from the `page.noindex` block in
    `_layouts/default.liquid`, which is a copy of a gem template and so can be silently undone by a
    `bundle update`. It only starts mattering once step 1 is done. Run:
 
@@ -375,7 +371,7 @@ well as the folder.
    curl -s https://gafap.github.io/         | grep -c noindex   # expect 0
    ```
 
-4. **Consider `apple_touch_icon`.** Empty, so an iOS home-screen bookmark shows a screenshot of the
+3. **Consider `apple_touch_icon`.** Empty, so an iOS home-screen bookmark shows a screenshot of the
    page rather than an icon. A 180×180 PNG fixes it. Cosmetic.
 
 ### Other known open items
