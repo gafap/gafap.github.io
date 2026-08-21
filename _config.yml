@@ -8,10 +8,10 @@ middle_name: A.
 last_name: Facchini Palma
 contact_note: # left empty on purpose: no sentence under the contact icons
 description: > # the ">" symbol means to ignore newlines until "footer_text:"
-  Associate Professor of Economics at Royal Holloway, University of London. Research in health, labour and education economics.
+  Associate Professor of Economics at Royal Holloway, University of London. Research in labour, health and development economics.
 footer_text: >
   Powered by <a href="https://jekyllrb.com/" target="_blank">Jekyll</a> with <a href="https://github.com/alshedivat/al-folio">al-folio</a> theme.
-keywords: Gabriel Facchini, health economics, labour economics, education economics, Royal Holloway, applied microeconomics
+keywords: Gabriel Facchini, labour economics, health economics, development economics, Royal Holloway, applied microeconomics
 lang: en # the language of your site (for example: en, fr, cn, ru, etc.)
 icon: 📊 # the emoji used as the favicon (alternatively, provide image name in /assets/img/)
 apple_touch_icon: # image name in /assets/img/ (or a rooted path / absolute URL) used for iOS home-screen bookmarks; needs a real 180x180 PNG, since Safari ignores the emoji favicon above. Left empty, iOS falls back to a screenshot of the page.

@@ -5,4 +5,4 @@ inline: true
 related_posts: false
 ---
 
-New project: Better financing systems in health care in Europe. Horizon Europe, Coordinator, 2023–2026 (€5 million).
+New project: **FLASH** — Flexible Approaches to Support Health through Financing. Funded by Horizon Europe, 2023–2026 (€4.96 million). Part of the research team.

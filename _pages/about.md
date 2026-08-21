@@ -34,7 +34,7 @@ latest_posts:
 ---
 
 I am an Associate Professor of Economics at Royal Holloway, University of London. I work in applied
-microeconomics, mainly in **health, labour and education economics**.
+microeconomics, mainly in **labour, health and development economics**.
 
 Before joining Royal Holloway, I taught at the Universitat Autònoma de Barcelona. I hold a PhD in
 Economics from the European University Institute.
