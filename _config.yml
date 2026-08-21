@@ -238,6 +238,11 @@ kramdown:
 include: ["_pages"]
 exclude:
   - AGENTS.md
+  # The CV's LaTeX source. It is version-controlled here because it is the
+  # source of truth for _data/cv.yml (see bin/cv_from_tex.py), but it is not
+  # part of the published site -- only the compiled assets/pdf/Facchini_CV.pdf
+  # is. Jekyll ignores underscore-prefixed directories anyway; this is explicit.
+  - _cv/
   - al-folio-upgrade-report.md
   - bin/
   - CLAUDE.md

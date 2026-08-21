@@ -22,3 +22,14 @@ __pycache__/
 
 # local colour comparison scratch file, not part of the site
 color-preview.html
+
+# LaTeX build artefacts, in case the CV is compiled in place rather than to a
+# temporary directory. Only the .tex belongs in _cv/; the PDF it produces is
+# committed at assets/pdf/Facchini_CV.pdf.
+_cv/*.aux
+_cv/*.log
+_cv/*.out
+_cv/*.pdf
+_cv/*.synctex*
+_cv/*.fls
+_cv/*.fdb_latexmk

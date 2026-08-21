@@ -83,6 +83,12 @@ jobs:
           cache: "npm"
       - name: Install JS deps 📦
         run: npm ci
+      # _data/cv.yml is generated from _cv/Facchini_CV.tex; see the header of
+      # bin/cv_from_tex.py. Fail here rather than deploy a CV page that disagrees
+      # with the PDF sitting next to it -- which is exactly what happened before,
+      # the PDF going 11 commits stale while the page kept being edited.
+      - name: Check the CV page matches its LaTeX source 📄
+        run: python bin/cv_from_tex.py --check
       - name: Update _config.yml ⚙️
         uses: fjogeleit/yaml-update-action@main
         with:

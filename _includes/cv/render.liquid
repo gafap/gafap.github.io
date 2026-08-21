@@ -175,6 +175,23 @@
               {% if section_title == 'Education' %}
                 {% assign entries = section_entries | al_cv_sort_by_date %}
                 {% include cv/education.liquid %}
+              {% comment %}
+                LOCAL CHANGE. 'Other Employment' holds company/position entries, the
+                same shape as Experience, so it is routed to the same template.
+
+                Without this it falls through to the generic branch at the bottom,
+                which renders only entries carrying `bullet` or `label`/`title` --
+                a company/position entry matches neither, so every row would be
+                dropped and the section would render as a heading with nothing
+                under it. Silently: no warning, no error.
+
+                It is a separate section rather than being merged into Experience
+                because the CV distinguishes academic posts from the pre-doctoral
+                jobs (World Bank, CEDLAS) below them.
+              {% endcomment %}
+              {% elsif section_title == 'Other Employment' %}
+                {% assign entries = section_entries | al_cv_sort_by_date %}
+                {% include cv/experience.liquid %}
               {% elsif section_title == 'Awards' or section_title == 'Honors and Awards' %}
                 {% assign entries = section_entries %}
                 {% include cv/awards.liquid %}

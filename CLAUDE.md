@@ -180,14 +180,39 @@ New project: **EDUCARE** — a study of early childhood education. Funded by Fun
 
 ### Update the CV
 
-Two things have to move together:
+**Edit `_cv/Facchini_CV.tex` and nothing else.** It is the single source of truth. The website's CV
+page and the downloadable PDF are both built from it:
 
-1. `_data/cv.yml` — the text of the CV as rendered on the website.
-2. `assets/pdf/Facchini_CV.pdf` — the downloadable PDF, linked from the icon in the CV page header
-   and from the CV icon on the homepage.
+```bash
+python bin/cv_from_tex.py                                    # rewrites _data/cv.yml
+pdflatex -output-directory=assets/pdf _cv/Facchini_CV.tex    # run TWICE
+```
 
-They are maintained by hand and do not check each other, so **when you update the PDF, update the
-YAML in the same commit.**
+Then commit all three — the `.tex`, the regenerated `_data/cv.yml`, and
+`assets/pdf/Facchini_CV.pdf`. The deploy workflow runs `bin/cv_from_tex.py --check` and **fails the
+build** if the YAML no longer matches the `.tex`, so a forgotten regeneration is caught rather than
+shipped. That check exists because the two used to be hand-maintained: the PDF went eleven commits
+stale while the page kept being updated, so the download contradicted the page beside it.
+
+`_data/cv.yml` carries a "GENERATED FILE — DO NOT EDIT BY HAND" header for the same reason. Editing
+it directly works until the next regeneration silently discards the change.
+
+**Entries in the `.tex` are macros, not prose**, and that is the whole point — `\cvposition{role}`
+`{institution}{location}{start}{end}` says which part is which, where
+`\item Associate Professor, Economics Department, Royal Holloway (University of London) Aug2026--
+current.` does not. The macro list is documented at the top of the `.tex` itself. Two things worth
+knowing:
+
+- A section heading in the `.tex` only reaches the website if it is in `SECTION_MAP` in
+  `bin/cv_from_tex.py`. Renaming a heading without updating that map **silently drops the section** —
+  `--check` will not catch it, because it compares the YAML against this script's own output.
+- `Research` and `References` are deliberately absent from that map. The Research page is built from
+  `papers.bib`, and publishing four referees' email addresses would hand them to harvesters.
+
+Anything written as a plain `\item` is ignored by the parser and appears in the PDF only.
+
+The Teaching **course list** is the one thing still duplicated: it is prose in the `.tex` and
+hand-written HTML in `_pages/teaching.md`, and nothing links them. Change a course in both.
 
 `_data/cv.yml` has a `sections:` block, and each section name becomes a heading on the page. The
 layout of a section is decided by the *shape of its entries*, not by the section name:
@@ -264,7 +289,7 @@ changed and why; read that comment before touching it.
 | `_layouts/bib.liquid` | Renames the publication buttons (`+abstract`, `+bib`, `journal`, `WP`), removes the badge column, adds `links_note`. |
 | `_layouts/about.liquid` | Photo above the header, whole name bold, dark-mode photo support, `_styles` support, real `alt` text on the profile photo. |
 | `_layouts/default.liquid` | One addition: a `noindex` meta tag for pages with `noindex: true`. Otherwise verbatim. |
-| `_includes/cv/render.liquid` | Two-column CV entries, one-line Languages, email as a `mailto:` link. |
+| `_includes/cv/render.liquid` | Two-column CV entries, one-line Languages, email as a `mailto:` link, an `Other Employment` branch. |
 | `_includes/news.liquid` | News as a bulleted list instead of the gem's wide-column table. |
 | `_includes/footer.liquid` | Shorter one-line footer. |
 
@@ -321,7 +346,9 @@ separately. They are the fix, and undoing them re-creates the problem.
 ```
 _bibliography/papers.bib     every paper, in every section of the Research page
 _news/                       one file per homepage news item
-_data/cv.yml                 the CV text
+_cv/Facchini_CV.tex          THE CV. Source of truth for both outputs below
+bin/cv_from_tex.py           builds _data/cv.yml from it; --check guards the deploy
+_data/cv.yml                 generated -- do not edit by hand
 _data/coauthors.yml          coauthor names -> their websites
 _data/socials.yml            which contact icons appear, and their targets
 _pages/about.md              homepage: bio, photo settings, news limit
@@ -331,7 +358,7 @@ _pages/cv.md                 CV page: points the layout at _data/cv.yml
 _pages/news.md               the full news archive at /news/ -- NOT in the navbar
 _pages/talks.md              unlisted slides page at /talks/ -- see below
 _layouts/default.liquid       adds <meta noindex> to any page with `noindex: true`
-assets/pdf/                  the CV PDF, and any slides you link from /talks/
+assets/pdf/                  the compiled CV PDF, and any slides linked from /talks/
 assets/img/                  the two profile photos
 assets/css/main.scss         every style decision on the site
 _config.yml                  site-wide settings
