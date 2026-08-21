@@ -373,6 +373,10 @@ well as the folder.
 
 3. **Consider `apple_touch_icon`.** Empty, so an iOS home-screen bookmark shows a screenshot of the
    page rather than an icon. A 180×180 PNG fixes it. Cosmetic.
+4. **Check the card renders** by pasting <https://gafap.github.io> into a LinkedIn post box (do not
+   post it) or <https://cards-dev.twitter.com/validator>. Expect the name, title and photo from
+   `assets/img/og_preview.png`. Note that these platforms cache aggressively — a card is often the
+   version they fetched days ago, not the current one.
 
 ### Other known open items
 
@@ -383,6 +387,13 @@ well as the folder.
   commits stale while the page kept being updated, so the download contradicted the page. §2 says
   they move in the same commit; that rule was not enough on its own. A `.tex`-to-`cv.yml` pipeline is
   the intended fix.
+- **`twitter:card` is hard-coded to `summary` in the gem** (`_includes/metadata.liquid`), which is
+  the small square thumbnail. `og_preview.png` is a wide 1200×630 banner, so X/Twitter would crop it
+  to a square; `summary_large_image` is the right value for it. Deliberately not fixed: it would
+  mean copying a whole gem template to change one word, and there is no X account here anyway
+  (`x_username` is unset, and X is not in `_data/socials.yml`). Everything that reads `og:image`
+  instead — LinkedIn, Bluesky, Slack, WhatsApp, mail clients — shows the banner correctly. Revisit
+  only if an X account is ever added.
 - **Three empty collections are still declared.** `books`, `projects` and `teachings` in
   `_config.yml` with empty folders. Deliberately left alone: `jekyll-archives` also has a `books:`
   block keyed to that collection, and with no local build available there is no way to check that
