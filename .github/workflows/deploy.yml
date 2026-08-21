@@ -7,6 +7,12 @@ on:
       - main
     paths:
       - "assets/**"
+      # The CV's LaTeX source and the script that turns it into _data/cv.yml.
+      # Without these two, a commit touching ONLY the .tex would not trigger a
+      # deploy at all -- so the cv_from_tex --check guard below would never run,
+      # and the site would quietly keep serving the previous CV.
+      - "_cv/**"
+      - "bin/**"
       - "**.bib"
       - "**.html"
       - "**.js"
@@ -34,6 +40,12 @@ on:
       - main
     paths:
       - "assets/**"
+      # The CV's LaTeX source and the script that turns it into _data/cv.yml.
+      # Without these two, a commit touching ONLY the .tex would not trigger a
+      # deploy at all -- so the cv_from_tex --check guard below would never run,
+      # and the site would quietly keep serving the previous CV.
+      - "_cv/**"
+      - "bin/**"
       - "**.bib"
       - "**.html"
       - "**.js"
