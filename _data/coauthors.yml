@@ -29,9 +29,9 @@
 #
 # Deliberately absent: Laurenz Baertsch, who has no website, and Vincenzo Atella,
 # Ermengol Coma, Roger Esteban-Fabró, Carolina Guiriguet, Eduardo Hermosilla,
-# Francesc X. Marin-Gomez, Francesca Marazzi, Leonardo Méndez-Boo, Aline Menezes,
-# Sara Spaziani and Concepción Violán, for whom no page could be confirmed that
-# was clearly theirs and clearly current.
+# Francesc X. Marin-Gomez, Leonardo Méndez-Boo, Aline Menezes and Concepción
+# Violán, for whom no page could be confirmed that was clearly theirs and clearly
+# current.
 #
 # Their names render as plain text, which is the correct fallback. Add them here
 # if you know their sites.
@@ -67,6 +67,10 @@
   - firstname: ["Matilde", "Matilde P.", "M.", "M. P."]
     url: https://sites.google.com/view/matildepmachado/home
 
+"marazzi":
+  - firstname: ["Francesca", "F."]
+    url: https://sites.google.com/view/francescamarazzi/home
+
 "nicodemo":
   - firstname: ["Catia", "C."]
     url: https://www.catianicodemo.com/
@@ -78,6 +82,10 @@
 "rocha":
   - firstname: ["Rudi", "R."]
     url: https://www.rudirocha.org/
+
+"spaziani":
+  - firstname: ["Sara", "S."]
+    url: https://www.saraspaziani.com/
 
 "vidal-alaball":
   - firstname: ["Josep", "J."]
