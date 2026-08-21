@@ -27,20 +27,18 @@
 # personal academic site over a departmental profile page -- departmental pages
 # break when people move.
 #
-# Deliberately absent, because no page could be confirmed that was clearly theirs
-# and clearly current: Vincenzo Atella, Ermengol Coma, Roger Esteban-Fabró,
-# Carolina Guiriguet, Eduardo Hermosilla, Francesc X. Marin-Gomez, Francesca
-# Marazzi, Leonardo Méndez-Boo, Aline Menezes, Sara Spaziani, Concepción Violán.
+# Deliberately absent: Laurenz Baertsch, who has no website, and Vincenzo Atella,
+# Ermengol Coma, Roger Esteban-Fabró, Carolina Guiriguet, Eduardo Hermosilla,
+# Francesc X. Marin-Gomez, Francesca Marazzi, Leonardo Méndez-Boo, Aline Menezes,
+# Sara Spaziani and Concepción Violán, for whom no page could be confirmed that
+# was clearly theirs and clearly current.
+#
 # Their names render as plain text, which is the correct fallback. Add them here
 # if you know their sites.
 
-"baertsch":
-  - firstname: ["Laurenz", "L."]
-    url: https://sites.google.com/view/laurenzbaertsch
-
 "berniell":
   - firstname: ["Inés", "I."]
-    url: https://sites.google.com/view/inesberniell
+    url: https://inesberniell.weebly.com/
 
 "bhalotra":
   - firstname: ["Sonia", "Sonia R.", "S.", "S. R."]
@@ -52,7 +50,7 @@
 
 "conti":
   - firstname: ["Gabriella", "G."]
-    url: https://sites.google.com/site/gabriellaconti/
+    url: http://gabriellaconti.org/
 
 "de moragas":
   - firstname: ["Antoni-Italo", "Antoni", "A.-I.", "A."]

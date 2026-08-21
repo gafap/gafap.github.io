@@ -164,6 +164,28 @@ html[data-theme='dark'] {
   color: var(--meta-color);
 }
 
+/* Coauthor links on the research page: body colour, not the link blue.
+   The theme styles them as ordinary links — blue text with a blue dashed
+   underline that goes solid on hover (see `.author a` in the gem's
+   _publications.scss). That made the linked coauthors the brightest thing in an
+   entry, louder than the paper's own title sitting above them, and it broke the
+   rule three levels up: authors are names, not filing detail, so they stay at
+   body colour whether or not the person happens to have a website.
+
+   The dashed underline is kept — it is what still marks the name as clickable
+   once the colour is gone, and it goes solid on hover exactly as before. Its
+   colour is `currentColor` so it tracks the text rather than staying blue, which
+   also matches the solid underline the theme already draws under Gabriel's own
+   name in the same line. */
+.publications ol.bibliography li .author a {
+  color: var(--global-text-color);
+  border-bottom-color: currentColor;
+
+  &:hover {
+    color: var(--global-text-color);
+  }
+}
+
 /* The journal name is an <em> inside `.periodical`, and the theme sets colour on
    a blanket list of elements — `p, h1, ..., em, div, li, span, strong { color:
    var(--global-text-color) }`. That paints the <em> directly rather than letting
