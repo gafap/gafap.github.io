@@ -46,7 +46,9 @@ OUT = ROOT / "_data" / "cv.yml"
 # drops that section -- --check will not catch it, because it compares against
 # this script's own output.
 SECTION_MAP = {
-    "Academic Positions": "Experience",
+    # Identity mapping: the heading is the same in the PDF and on the website,
+    # so the two cannot drift into calling the same section different things.
+    "Academic Positions": "Academic Positions",
     "Education": "Education",
     "Fields of Interest": "Fields of Interest",
     "Grants": "Grants",
@@ -64,7 +66,7 @@ SECTION_MAP = {
 # of where they sit in the .tex, so the PDF's ordering and the page's ordering can
 # differ where that reads better.
 SECTION_ORDER = [
-    "Experience",
+    "Academic Positions",
     "Education",
     "Fields of Interest",
     "Research",

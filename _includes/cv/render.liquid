@@ -176,20 +176,28 @@
                 {% assign entries = section_entries | al_cv_sort_by_date %}
                 {% include cv/education.liquid %}
               {% comment %}
-                LOCAL CHANGE. 'Other Employment' holds company/position entries, the
-                same shape as Experience, so it is routed to the same template.
+                LOCAL CHANGE. Both of these hold company/position entries -- the same
+                shape as the gem's Experience section -- so they are routed to the
+                same template.
 
-                Without this it falls through to the generic branch at the bottom,
-                which renders only entries carrying `bullet` or `label`/`title` --
-                a company/position entry matches neither, so every row would be
-                dropped and the section would render as a heading with nothing
-                under it. Silently: no warning, no error.
+                Without this they fall through to the generic branch at the bottom,
+                which renders only entries carrying `bullet` or `label`/`title`. A
+                company/position entry matches neither, so every row would be dropped
+                and the section would render as a heading with nothing under it.
+                Silently: no warning, no error.
 
-                It is a separate section rather than being merged into Experience
-                because the CV distinguishes academic posts from the pre-doctoral
-                jobs (World Bank, CEDLAS) below them.
+                'Academic Positions' is the gem's Experience section under the name
+                the PDF uses, so the two call it the same thing. The gem hard-codes
+                the name `Experience` in the block above this loop; renaming the
+                section in _data/cv.yml therefore takes it out of that block's reach
+                and it lands here instead. Nothing in cv.yml is called Experience any
+                more, so that block finds an empty array and emits nothing.
+
+                'Other Employment' is separate from it on purpose: the CV
+                distinguishes academic posts from the pre-doctoral jobs (World Bank,
+                CEDLAS) listed further down.
               {% endcomment %}
-              {% elsif section_title == 'Other Employment' %}
+              {% elsif section_title == 'Other Employment' or section_title == 'Academic Positions' %}
                 {% assign entries = section_entries | al_cv_sort_by_date %}
                 {% include cv/experience.liquid %}
               {% elsif section_title == 'Awards' or section_title == 'Honors and Awards' %}

@@ -206,6 +206,12 @@ knowing:
 - A section heading in the `.tex` only reaches the website if it is in `SECTION_MAP` in
   `bin/cv_from_tex.py`. Renaming a heading without updating that map **silently drops the section** —
   `--check` will not catch it, because it compares the YAML against this script's own output.
+- **Renaming a section also needs a branch in `_includes/cv/render.liquid`** if its entries are the
+  `company`/`position` shape. That file routes by section *name*: `Academic Positions` and
+  `Other Employment` are named explicitly. A name it does not recognise falls to the generic branch,
+  which only renders `bullet` and `label`/`title` entries — so the section comes out as a heading
+  with nothing beneath it, with no warning and no build failure. Change the heading in three places
+  or none: the `.tex`, `SECTION_MAP`/`SECTION_ORDER`, and `render.liquid`.
 - `Research` and `References` are deliberately absent from that map. The Research page is built from
   `papers.bib`, and publishing four referees' email addresses would hand them to harvesters.
 
