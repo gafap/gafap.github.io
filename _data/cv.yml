@@ -27,12 +27,12 @@ cv:
         location: Egham, UK
         start_date: 2026-08
       - company: Royal Holloway, University of London
-        position: Assistant Professor / Lecturer, Department of Economics
+        position: Assistant Professor, Department of Economics
         location: Egham, UK
         start_date: 2022-09
         end_date: 2026-07
       - company: Universitat Autònoma de Barcelona
-        position: Assistant Professor (without tenure track), Department of Applied Economics
+        position: Assistant Professor, Department of Applied Economics
         location: Barcelona, Spain
         start_date: 2017-09
         end_date: 2022-08
@@ -63,7 +63,7 @@ cv:
         date: "2008"
 
     Fields of Interest:
-      - bullet: Applied Microeconomics, Labour Economics, Health Economics, Development Economics
+      - bullet: "Applied Microeconomics: Labour, Health and Development Economics"
 
     Research:
       - bullet: See the [publications page](/publications/) for the full list of published papers, book chapters, working papers and work in progress.
