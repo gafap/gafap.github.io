@@ -262,7 +262,8 @@ changed and why; read that comment before touching it.
 | -------------- | --------------- |
 | `assets/css/main.scss` | Passes two custom colours into the theme, then defines the shared type scale and all site-specific CSS (§6). |
 | `_layouts/bib.liquid` | Renames the publication buttons (`+abstract`, `+bib`, `journal`, `WP`), removes the badge column, adds `links_note`. |
-| `_layouts/about.liquid` | Photo above the header, whole name bold, dark-mode photo support, `_styles` support. |
+| `_layouts/about.liquid` | Photo above the header, whole name bold, dark-mode photo support, `_styles` support, real `alt` text on the profile photo. |
+| `_layouts/default.liquid` | One addition: a `noindex` meta tag for pages with `noindex: true`. Otherwise verbatim. |
 | `_includes/cv/render.liquid` | Two-column CV entries, one-line Languages, email as a `mailto:` link. |
 | `_includes/news.liquid` | News as a bulleted list instead of the gem's wide-column table. |
 | `_includes/footer.liquid` | Shorter one-line footer. |
@@ -274,6 +275,25 @@ bundle exec al-folio upgrade overrides diff _layouts/bib.liquid
 ```
 
 (That command needs Ruby, so it is not runnable on this machine today.)
+
+### Reading the gem's templates without Ruby
+
+You do not need Ruby to *read* a gem — a `.gem` file is just a tar archive. This is how to see the
+original of a file you are about to override, or check whether the theme really does what you assume
+it does:
+
+```bash
+V=$(grep -m1 "al_folio_core (" Gemfile.lock | tr -d ' al_folio_core()')
+cd "$(mktemp -d)" && curl -sLO "https://rubygems.org/downloads/al_folio_core-$V.gem"
+tar -xf "al_folio_core-$V.gem" && mkdir -p data && tar -xzf data.tar.gz -C data
+ls data/_layouts data/_includes
+```
+
+Swap `al_folio_core` for `al_folio_cv` or any other gem in the `Gemfile`. **Do this before writing
+an override**, so the copy starts from the real file rather than a reconstruction, and diff against
+it afterwards to keep the override honest. It is also the only way to settle a question like "does
+the theme call a hook here?" — the answer for `<head>` turned out to be no, after a hook file had
+already been written and silently did nothing.
 
 ## 6. Design rules
 
@@ -310,7 +330,7 @@ _pages/teaching.md           Teaching page: hand-written HTML list
 _pages/cv.md                 CV page: points the layout at _data/cv.yml
 _pages/news.md               the full news archive at /news/ -- NOT in the navbar
 _pages/talks.md              unlisted slides page at /talks/ -- see below
-_includes/hook/head.liquid   adds <meta noindex> to any page with `noindex: true`
+_layouts/default.liquid       adds <meta noindex> to any page with `noindex: true`
 assets/pdf/                  the CV PDF, and any slides you link from /talks/
 assets/img/                  the two profile photos
 assets/css/main.scss         every style decision on the site
@@ -326,7 +346,7 @@ is the whole point — older items drop off the homepage but stay reachable.
 
 **`_pages/talks.md` is the unlisted page** for conference slides: `nav: false` keeps it out of the
 navbar, `sitemap: false` out of `sitemap.xml`, and `noindex: true` triggers the meta tag in
-`_includes/hook/head.liquid`. Read the warning in its front matter before putting anything there —
+`_layouts/default.liquid`. Read the warning in its front matter before putting anything there —
 this is obscurity, not privacy, because the repo is public. For slides that belong to a paper
 already on the Research page, the `slides` BibTeX field (§2) is the better home.
 
@@ -346,16 +366,21 @@ well as the folder.
    already on, so link previews work, but with no image. Make a **1200×630** PNG at
    `assets/img/og_preview.png` and uncomment the path. `prof_pic.jpg` is square (1200×1200), so it
    needs cropping, not copying, or the card letterboxes it.
-3. **Check the noindex hook actually fires.** `_includes/hook/head.liquid` assumes al-folio calls a
-   `hook/head` include, which could not be verified locally (no Ruby, rule 3). Run:
-   `curl -s https://gafap.github.io/talks/ | grep -c noindex` → expect `1`. If it returns `0`, the
-   unlisted page is not protected and needs another mechanism. Only matters once step 1 is done.
+3. **Re-check the noindex tag still renders.** It comes from the `page.noindex` block in
+   `_layouts/default.liquid`, which is a copy of a gem template and so can be silently undone by a
+   `bundle update`. It only starts mattering once step 1 is done. Run:
+
+   ```bash
+   curl -s https://gafap.github.io/talks/ | grep -c noindex   # expect 1
+   curl -s https://gafap.github.io/         | grep -c noindex   # expect 0
+   ```
+
 4. **Consider `apple_touch_icon`.** Empty, so an iOS home-screen bookmark shows a screenshot of the
    page rather than an icon. A 180×180 PNG fixes it. Cosmetic.
 
 ### Other known open items
 
-- **Unlisted pages are set up** — see `_pages/talks.md` and `_includes/hook/head.liquid` in §7. The
+- **Unlisted pages are set up** — see `_pages/talks.md` and `_layouts/default.liquid` in §7. The
   pattern is `nav: false` + `sitemap: false` + `noindex: true`. **The repo stays public, so this is
   obscurity, not access control.** Never put anything there you are not free to redistribute.
 - **`_data/cv.yml` and `assets/pdf/Facchini_CV.pdf` drifted apart once already** — the PDF went 11

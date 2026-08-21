@@ -6,7 +6,7 @@ description:
 # UNLISTED PAGE. Reachable by URL, but deliberately not advertised:
 #   nav: false      keeps it out of the navbar
 #   sitemap: false  keeps it out of /sitemap.xml (jekyll-sitemap reads this)
-# and _includes/hook/head.liquid adds a noindex meta tag for any page with
+# and _layouts/default.liquid adds a noindex meta tag for any page with
 # `noindex: true` below.
 #
 # This is OBSCURITY, NOT PRIVACY. The repo at github.com/gafap/gafap.github.io is
