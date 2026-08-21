@@ -21,6 +21,11 @@ layout: default
      _layouts/page.liquid. The gem wires `_styles` into page.liquid, post.liquid
      and book-review.liquid but not into about.liquid, so a `_styles` block in
      _pages/about.md was otherwise ignored without warning.
+  5. Real alt text on the profile photo. The gem passes `alt=page.profile.image`,
+     which is the FILENAME, so the published HTML read `alt="prof_pic.jpg"` and a
+     screen reader announced "prof pic dot jpg". Both photos are the same person,
+     so both branches below describe the person instead. Kept as one `assign` so
+     the light and dark copies cannot drift apart.
 
   After `bundle update` of al_folio_core, compare against the gem's version with:
     bundle exec al-folio upgrade overrides diff _layouts/about.liquid
@@ -46,23 +51,32 @@ layout: default
           {% endif %}
           {% capture sizes %}(min-width: {{ site.max_width }}) {{ site.max_width | minus: 30 | times: 0.3}}px, (min-width: 576px)
       30vw, 95vw"{% endcapture %}
+          {% comment %}
+            LOCAL CHANGE 5 (see the note at the top): describe the person, not the
+            file. `profile.image_alt` in the page front matter wins; otherwise fall
+            back to the site owner's name, which is the right description for an
+            about page by definition. Both photos are the same person, so both
+            branches share one value and cannot drift apart.
+          {% endcomment %}
+          {% capture site_full_name %}{{ site.first_name }} {{ site.middle_name }} {{ site.last_name }}{% endcapture %}
+          {% assign profile_image_alt = page.profile.image_alt | default: site_full_name | strip %}
           {% if page.profile.image_dark %}
             {% assign profile_image_dark_path = page.profile.image_dark | prepend: 'assets/img/' %}
             <div class="only-light">
               {%
                 include figure.liquid loading="eager" path=profile_image_path class=profile_image_class sizes=sizes
-                alt=page.profile.image cache_bust=true
+                alt=profile_image_alt cache_bust=true
               %}
             </div>
             <div class="only-dark">
               {%
                 include figure.liquid loading="eager" path=profile_image_dark_path class=profile_image_class sizes=sizes
-                alt=page.profile.image_dark cache_bust=true
+                alt=profile_image_alt cache_bust=true
               %}
             </div>
           {% else %}
             {%
-              include figure.liquid loading="eager" path=profile_image_path class=profile_image_class sizes=sizes alt=page.profile.image
+              include figure.liquid loading="eager" path=profile_image_path class=profile_image_class sizes=sizes alt=profile_image_alt
               cache_bust=true
             %}
           {% endif %}

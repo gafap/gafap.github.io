@@ -59,11 +59,14 @@ Beyond the standard BibTeX fields, these are the custom ones this site understan
 | `annotation`  | Adds a small info popover next to the authors. |
 
 Sorting within each section is newest first (`sort_by: year`, `order: descending` in `_config.yml`).
-**Work-in-progress entries carry no `year`** — they have no real one yet — so all four tie and that
-section displays them in the *reverse* of their order in the file. Reorder them in `papers.bib` to
-change what the page shows.
+**Work-in-progress entries carry no `year`** — they have no real one yet — so all four tie, and a tie
+leaves them in the order they appear in the file. Verified against the live page: `papers.bib` order
+is what the Work in Progress section shows, top to bottom. Reorder them there to change it.
 
-Coauthor names become links if the person is listed in `_data/coauthors.yml`.
+Coauthor names become links if the person is listed in `_data/coauthors.yml`. That file explains the
+lookup at the top — the key is the surname **downcased and stripped of accents**, and two people who
+share a surname (Libertad and Ignacio González) live under one key, told apart by first name. Not
+everyone is in it; a name that isn't simply renders as plain text, which is the right fallback.
 
 ### Add a button next to +abstract and +bib
 
@@ -305,12 +308,27 @@ _pages/about.md              homepage: bio, photo settings, news limit
 _pages/publications.md       Research page: section headings and their bib queries
 _pages/teaching.md           Teaching page: hand-written HTML list
 _pages/cv.md                 CV page: points the layout at _data/cv.yml
-assets/pdf/                  the CV PDF
+_pages/news.md               the full news archive at /news/ -- NOT in the navbar
+_pages/talks.md              unlisted slides page at /talks/ -- see below
+_includes/hook/head.liquid   adds <meta noindex> to any page with `noindex: true`
+assets/pdf/                  the CV PDF, and any slides you link from /talks/
 assets/img/                  the two profile photos
 assets/css/main.scss         every style decision on the site
 _config.yml                  site-wide settings
 robots.txt                   currently blocking all crawlers -- see below
 ```
+
+**`_pages/news.md` exists because the homepage's "News" heading links to `/news/`.** Before it, that
+heading pointed at a URL that returned 404. It is deliberately `nav: false`: the heading is the only
+route to it. It also calls `news.liquid` *without* `limit=true`, so it lists every item, where the
+homepage shows only the 5 most recent (`announcements.limit` in `_pages/about.md`). That difference
+is the whole point — older items drop off the homepage but stay reachable.
+
+**`_pages/talks.md` is the unlisted page** for conference slides: `nav: false` keeps it out of the
+navbar, `sitemap: false` out of `sitemap.xml`, and `noindex: true` triggers the meta tag in
+`_includes/hook/head.liquid`. Read the warning in its front matter before putting anything there —
+this is obscurity, not privacy, because the repo is public. For slides that belong to a paper
+already on the Research page, the `slides` BibTeX field (§2) is the better home.
 
 The `_books/`, `_projects/`, `_teachings/` and `_posts/` folders are empty on purpose — those parts
 of al-folio are not used here. Three of them are still declared under `collections:` in
@@ -319,12 +337,35 @@ well as the folder.
 
 ## 8. Known open items
 
-- **`robots.txt` blocks all search engines.** It has `Disallow: /` and the `Sitemap:` line is
-  commented out. **Revert both before announcing the site**, or it will never appear in Google. The
-  file itself carries instructions on how.
-- **Unlisted pages are not set up yet.** For teaching materials that should be reachable by URL but
-  neither listed nor indexed, the agreed pattern is `nav: false` + `sitemap: false` in the front
-  matter plus a noindex meta tag. The repo itself stays public.
+### Before announcing the site — do all of these
+
+1. **`robots.txt` blocks all search engines.** It has `Disallow: /` and the `Sitemap:` line is
+   commented out. **Revert both**, or the site will never appear in Google. The file itself carries
+   instructions on how.
+2. **`og_image` in `_config.yml` has no file behind it.** `serve_og_meta` and `serve_schema_org` are
+   already on, so link previews work, but with no image. Make a **1200×630** PNG at
+   `assets/img/og_preview.png` and uncomment the path. `prof_pic.jpg` is square (1200×1200), so it
+   needs cropping, not copying, or the card letterboxes it.
+3. **Check the noindex hook actually fires.** `_includes/hook/head.liquid` assumes al-folio calls a
+   `hook/head` include, which could not be verified locally (no Ruby, rule 3). Run:
+   `curl -s https://gafap.github.io/talks/ | grep -c noindex` → expect `1`. If it returns `0`, the
+   unlisted page is not protected and needs another mechanism. Only matters once step 1 is done.
+4. **Consider `apple_touch_icon`.** Empty, so an iOS home-screen bookmark shows a screenshot of the
+   page rather than an icon. A 180×180 PNG fixes it. Cosmetic.
+
+### Other known open items
+
+- **Unlisted pages are set up** — see `_pages/talks.md` and `_includes/hook/head.liquid` in §7. The
+  pattern is `nav: false` + `sitemap: false` + `noindex: true`. **The repo stays public, so this is
+  obscurity, not access control.** Never put anything there you are not free to redistribute.
+- **`_data/cv.yml` and `assets/pdf/Facchini_CV.pdf` drifted apart once already** — the PDF went 11
+  commits stale while the page kept being updated, so the download contradicted the page. §2 says
+  they move in the same commit; that rule was not enough on its own. A `.tex`-to-`cv.yml` pipeline is
+  the intended fix.
+- **Three empty collections are still declared.** `books`, `projects` and `teachings` in
+  `_config.yml` with empty folders. Deliberately left alone: `jekyll-archives` also has a `books:`
+  block keyed to that collection, and with no local build available there is no way to check that
+  removing one without the other still builds. Tidy them together, or not at all.
 - **The email address sits in the page source as a plain `mailto:`**, both in the homepage contact
   icons and in the CV contact table. `protect_email: true` in `_config.yml` does not prevent it,
   because the contact icons are generated by the `jekyll-socials` plugin, which ignores that

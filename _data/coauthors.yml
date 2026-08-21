@@ -1,34 +1,90 @@
-"adams":
-  - firstname: ["Edwin", "E.", "E. P.", "Edwin Plimpton"]
-    url: https://en.wikipedia.org/wiki/Edwin_Plimpton_Adams
+# Coauthor names -> their websites. A name in _bibliography/papers.bib becomes a
+# link on the Research page if, and only if, it is listed here.
+#
+# This file replaced al-folio's demo version, which shipped Einstein's coauthors
+# (Podolsky, Rosen, Bach, Schrödinger, ...). Because none of those matched a real
+# name, not one coauthor on the Research page was a link.
+#
+# HOW THE LOOKUP WORKS (see _layouts/bib.liquid, the `coauthor_url` block):
+#
+#   1. The author's LAST name is taken from papers.bib, then `| downcase` and
+#      `| remove_accents` are applied, and the result is used as the key here.
+#      So the keys below are lowercase and UNACCENTED, and they keep any hyphen
+#      or space that is part of the surname:
+#         "Cáceres-Delpiano, Julio"  -> caceres-delpiano
+#         "De Moragas, Antoni-Italo" -> de moragas      (a space, not a hyphen)
+#         "Violán, Concepción"       -> violan
+#
+#   2. The FIRST name is then matched against the `firstname` list with `contains`,
+#      and it is NOT accent-stripped -- write it exactly as papers.bib has it,
+#      accents and all ("Inés", not "Ines").
+#
+#   3. Because the match is on surname first, two people who share one live under
+#      a single key as two entries, told apart by `firstname`. Libertad González
+#      and Ignacio González below are the case in point.
+#
+# Adding someone: add the key, check the URL actually resolves, and prefer a
+# personal academic site over a departmental profile page -- departmental pages
+# break when people move.
+#
+# Deliberately absent, because no page could be confirmed that was clearly theirs
+# and clearly current: Vincenzo Atella, Ermengol Coma, Roger Esteban-Fabró,
+# Carolina Guiriguet, Eduardo Hermosilla, Francesc X. Marin-Gomez, Francesca
+# Marazzi, Leonardo Méndez-Boo, Aline Menezes, Sara Spaziani, Concepción Violán.
+# Their names render as plain text, which is the correct fallback. Add them here
+# if you know their sites.
 
-"podolsky":
-  - firstname: ["Boris", "B.", "B. Y.", "Boris Yakovlevich"]
-    url: https://en.wikipedia.org/wiki/Boris_Podolsky
+"baertsch":
+  - firstname: ["Laurenz", "L."]
+    url: https://sites.google.com/view/laurenzbaertsch
 
-"rosen":
-  - firstname: ["Nathan", "N."]
-    url: https://en.wikipedia.org/wiki/Nathan_Rosen
+"berniell":
+  - firstname: ["Inés", "I."]
+    url: https://sites.google.com/view/inesberniell
 
-"bach":
-  - firstname: ["Johann Sebastian", "J. S."]
-    url: https://en.wikipedia.org/wiki/Johann_Sebastian_Bach
+"bhalotra":
+  - firstname: ["Sonia", "Sonia R.", "S.", "S. R."]
+    url: https://sites.google.com/site/srbhalotra/
 
-  - firstname: ["Carl Philipp Emanuel", "C. P. E."]
-    url: https://en.wikipedia.org/wiki/Carl_Philipp_Emanuel_Bach
+"caceres-delpiano":
+  - firstname: ["Julio", "J."]
+    url: https://sites.google.com/site/caceresjulio/
 
-"przibram":
-  - firstname: ["Karl"]
-    url: https://link.springer.com/article/10.1007/s00016-019-00242-z
+"conti":
+  - firstname: ["Gabriella", "G."]
+    url: https://sites.google.com/site/gabriellaconti/
 
-"schrodinger":
-  - firstname: ["Erwin"]
-    url: https://en.wikipedia.org/wiki/Erwin_Schr%C3%B6dinger
+"de moragas":
+  - firstname: ["Antoni-Italo", "Antoni", "A.-I.", "A."]
+    url: https://www.antonidemoragas.eu
 
-"lorentz":
-  - firstname: ["Hendrik Antoon"]
-    url: https://en.wikipedia.org/wiki/Hendrik_Lorentz
+# Two different people. Matched on first name -- see note 3 at the top.
+"gonzalez":
+  - firstname: ["Libertad", "L."]
+    url: https://libertadgonzalez.com/
+  - firstname: ["Ignacio", "I."]
+    url: https://www.ignacioglz.com/
 
-"planck":
-  - firstname: ["Max"]
-    url: https://en.wikipedia.org/wiki/Max_Planck
+"machado":
+  - firstname: ["Matilde", "Matilde P.", "M.", "M. P."]
+    url: https://sites.google.com/view/matildepmachado/home
+
+"nicodemo":
+  - firstname: ["Catia", "C."]
+    url: https://www.catianicodemo.com/
+
+"perez-vincent":
+  - firstname: ["Santiago", "Santiago M.", "S.", "S. M."]
+    url: https://www.santiagoperezvincent.com/
+
+"rocha":
+  - firstname: ["Rudi", "R."]
+    url: https://www.rudirocha.org/
+
+"vidal-alaball":
+  - firstname: ["Josep", "J."]
+    url: http://josep-vidal-alaball.blogspot.com/
+
+"woodworth":
+  - firstname: ["Lindsey", "L."]
+    url: https://www.lwoodworth.com/

@@ -107,9 +107,23 @@ max_width: 930px
 # -----------------------------------------------------------------------------
 # Display links to the page with a preview object on social media.
 # see https://schema.org/docs/faq.html for more information
-serve_og_meta: false # Include Open Graph meta tags in the HTML head
-serve_schema_org: false # Include Schema.org in the HTML head
-og_image: # The site-wide (default for all links) Open Graph preview image
+#
+# ON even though robots.txt still blocks every crawler (see robots.txt and §8 of
+# CLAUDE.md). The two are unrelated: Open Graph tags are read by whoever the link
+# is PASTED TO -- LinkedIn, Bluesky, WhatsApp, Slack, a mail client -- not by a
+# search crawler. With them off, sharing the URL anywhere produced a bare link
+# with no title, description or image. With them on, previews work immediately
+# while indexing stays blocked.
+#
+# The preview text comes from `description` at the top of this file; the title
+# from the page's own title. Nothing further to fill in.
+serve_og_meta: true # Include Open Graph meta tags in the HTML head
+serve_schema_org: true # Include Schema.org in the HTML head
+# The site-wide default preview image. Needs a real file at this path before it
+# does anything -- see the TODO in CLAUDE.md §8. Facebook/LinkedIn want 1200x630;
+# prof_pic.jpg is square (1200x1200) so it needs cropping rather than copying, or
+# it will be letterboxed in the card.
+og_image: # /assets/img/og_preview.png
 
 # -----------------------------------------------------------------------------
 # Analytics and search engine verification
