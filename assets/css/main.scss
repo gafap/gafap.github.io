@@ -180,6 +180,7 @@ html[data-theme='dark'] {
 .publications ol.bibliography li .author a {
   color: var(--global-text-color);
   border-bottom-color: currentColor;
+  font-weight: inherit;
 
   &:hover {
     color: var(--global-text-color);
