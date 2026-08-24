@@ -6,7 +6,7 @@ subtitle: Associate Professor of Economics, <a href='https://www.royalholloway.a
 
 profile:
   align: right
-  image: prof_pic.jpg # light mode: studio headshot on a grey-blue backdrop
+  image: prof_pic2.jpg # light mode: studio headshot on a grey-blue backdrop
   image_dark: prof_pic_dark.jpg # dark mode: black-and-white, less formal (see _layouts/about.liquid)
   image_circular: false # crops the image to make it circular
 
