@@ -1,10 +1,16 @@
 ---
 permalink: /robots.txt
 ---
-# SITE UNDER CONSTRUCTION -- currently asking all crawlers not to index anything.
-# When the site is ready to be public, change "Disallow: /" back to "Disallow:"
-# (empty = allow everything) and restore the Sitemap line below.
+# Open to all crawlers. The site was closed to them while it was under
+# construction; to close it again, set "Disallow: /" and comment out the
+# Sitemap line.
+#
+# This file does not control /talks/. That page stays out of search results via
+# `noindex: true` in its front matter (rendered by _layouts/default.liquid) and
+# `sitemap: false`, which keeps it out of sitemap.xml. Adding a Disallow rule
+# for it here would be counterproductive: a disallowed page cannot be crawled,
+# so the noindex tag would never be read.
 User-agent: *
-Disallow: /
+Disallow:
 
-# Sitemap: {{ site.baseurl | prepend: site.url }}/sitemap.xml
+Sitemap: {{ site.baseurl | prepend: site.url }}/sitemap.xml

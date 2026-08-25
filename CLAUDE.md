@@ -27,8 +27,8 @@ assistance consistent with decisions already taken.
    preview the site locally. See §4 for how to preview.
 4. **Style decisions go in one place.** Never give a page its own font size, weight or colour —
    see §6.
-5. **`robots.txt` currently blocks every search engine.** That is on purpose while the site is
-   under construction, and it must be reverted before the site is announced. See §8.
+5. **The site is public and open to search engines.** `robots.txt` allows all crawlers and points
+   at the sitemap. `/talks/` is the one page kept out of search, and not by `robots.txt` — see §8.
 
 ---
 
@@ -385,7 +385,7 @@ assets/pdf/                  the compiled CV PDF, and any slides linked from /ta
 assets/img/                  the profile photos, the og_preview banner, the apple-touch icon
 assets/css/main.scss         every style decision on the site
 _config.yml                  site-wide settings
-robots.txt                   currently blocking all crawlers -- see below
+robots.txt                   open to all crawlers; points at sitemap.xml
 ```
 
 **`_pages/news.md` exists because the homepage's "News" heading links to `/news/`.** Before it, that
@@ -407,24 +407,27 @@ well as the folder.
 
 ## 8. Known open items
 
-### Before announcing the site — do all of these
+### Going public — done, but keep checking item 1
 
-1. **`robots.txt` blocks all search engines.** It has `Disallow: /` and the `Sitemap:` line is
-   commented out. **Revert both**, or the site will never appear in Google. The file itself carries
-   instructions on how.
-2. **Re-check the noindex tag still renders.** It comes from the `page.noindex` block in
+The site was closed to crawlers until August 2026. `robots.txt` now allows everything and restores
+the `Sitemap:` line, the apple-touch icon is set, and the link-preview image resolves. What remains
+is the one check that can silently regress.
+
+1. **Re-check the noindex tag still renders.** It comes from the `page.noindex` block in
    `_layouts/default.liquid`, which is a copy of a gem template and so can be silently undone by a
-   `bundle update`. It only starts mattering once step 1 is done. Run:
+   `bundle update`. Now that crawlers are allowed in, this is the only thing keeping `/talks/` out
+   of search results, so re-run it after every `bundle update`:
 
    ```bash
    curl -s https://gafap.github.io/talks/ | grep -c noindex   # expect 1
    curl -s https://gafap.github.io/         | grep -c noindex   # expect 0
    ```
 
-3. **Check the card renders** by pasting <https://gafap.github.io> into a LinkedIn post box (do not
+2. **Check the card renders** by pasting <https://gafap.github.io> into a LinkedIn post box (do not
    post it) or <https://cards-dev.twitter.com/validator>. Expect the name, title and photo from
    `assets/img/og_preview.png`. Note that these platforms cache aggressively — a card is often the
-   version they fetched days ago, not the current one.
+   version they fetched days ago, not the current one. This check could not be done while
+   `robots.txt` said `Disallow: /`, since LinkedIn's scraper honours it.
 
    Before trusting the card, check the image is actually *there*:
 
