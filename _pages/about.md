@@ -33,8 +33,11 @@ latest_posts:
   limit: 3
 ---
 
-I am an Associate Professor of Economics at Royal Holloway, University of London. I work in applied
-microeconomics, mainly in **labour, health and development economics**.
+My research is in applied microeconomics, spanning labour, health and development economics. I study
+how policies and institutions shape people's outcomes across the life course, from birth and early
+childhood into adult life. Much of that work looks at how services are organised — how staffing,
+workload and incentives change what people actually receive. Most of my work combines large
+administrative datasets with natural experiments.
 
 Before joining Royal Holloway, I taught at the Universitat Autònoma de Barcelona. I hold a PhD in
 Economics from the European University Institute.
