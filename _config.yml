@@ -150,7 +150,11 @@ analytics:
 enable_simple_analytics: false # Simple Analytics identifies a site by its domain, so it has no ID to set above
 
 # For Google Search Console, see https://support.google.com/webmasters/answer/9008080?hl=en#meta_tag_verification&zippy=%2Chtml-tag
-google_site_verification: dJ70v4tcTSPJHpqIzrrCrKX9bLl-PBkb8zs4zWqt6tU # google-site-verification ID (Google Search Console). Just the token from inside content="...", not the whole <meta> tag. Not a secret: it is served in the <head> of every page, and it only proves control of this site to Google.
+# NOTE: this token does nothing on its own. `enable_google_verification` must also
+# be true -- it lives in the "Optional Features" block near the bottom of this file.
+# Just the token from inside content="...", not the whole <meta> tag. Not a secret:
+# it is served in the <head> of every page, which is how it works at all.
+google_site_verification: dJ70v4tcTSPJHpqIzrrCrKX9bLl-PBkb8zs4zWqt6tU
 bing_site_verification: # out your bing-site-verification ID (Bing Webmaster)
 
 # -----------------------------------------------------------------------------
@@ -497,8 +501,12 @@ lazy_loading_images: true # enables lazy loading of images (recommended)
 # Optional Features
 # -----------------------------------------------------------------------------
 
-enable_google_verification: false # enables google site verification
-enable_bing_verification: false # enables bing site verification
+# This is the on-switch for the `google_site_verification:` token set much higher
+# up in this file (search for it). The gem's _includes/metadata.liquid renders the
+# <meta> tag ONLY when this is true -- setting the token on its own emits nothing
+# and Search Console verification then fails with no clue why.
+enable_google_verification: true # enables google site verification
+enable_bing_verification: false # enables bing site verification -- needs bing_site_verification set too, same pattern
 enable_cookie_consent: false # enables GDPR-compliant cookie consent dialog (https://github.com/orestbida/cookieconsent)
 enable_masonry: true # enables automatic project cards arrangement
 enable_math: true # enables math typesetting (uses MathJax)
