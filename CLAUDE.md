@@ -4,8 +4,14 @@ This is Gabriel Facchini's academic website: <https://gafap.github.io>. It is a
 [Jekyll](https://jekyllrb.com/) site built on the [al-folio](https://github.com/alshedivat/al-folio)
 theme, migrated from Weebly in August 2026.
 
-This file is the maintenance guide. It is also what Claude Code reads automatically at the start of
-every session in this repo, so the conventions below are instructions, not just notes.
+**This file is the maintenance guide for the site** — what each part does, which file is the source
+of truth for what, and the traps that have already been hit once. Read it before changing anything
+here; `README.md` is the shorter overview.
+
+It doubles as the project instructions that Claude Code loads at the start of a session in this
+repo, which is why the conventions below are written as rules rather than as notes. The site is
+maintained with AI assistance and the commit history says so; this file is what keeps that
+assistance consistent with decisions already taken.
 
 ---
 
