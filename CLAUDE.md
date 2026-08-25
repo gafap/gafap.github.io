@@ -253,9 +253,19 @@ typeset by the shared type scale (§6).
 
 ### Change the photos
 
-`assets/img/prof_pic.jpg` is the light-mode photo, `assets/img/prof_pic_dark.jpg` the dark-mode one.
+`assets/img/prof_pic2.jpg` is the light-mode photo, `assets/img/prof_pic_dark.jpg` the dark-mode one.
+Both are named in the `profile:` block of `_pages/about.md`, which is what actually decides it —
+check there rather than trusting the filenames. (`prof_pic.jpg` is the *previous* light-mode photo
+and is no longer referenced by anything.)
+
 **Keep both at the same pixel dimensions** — both are rendered and one is hidden with CSS, so
-mismatched sizes make the page jump when the theme is toggled.
+mismatched sizes make the page jump when the theme is toggled. They are currently 793×793 and
+1200×1200: both square, so nothing jumps, but the light one has less detail to give a high-DPI
+screen. Worth evening up next time the photo is replaced.
+
+**Changing the light-mode photo means rerunning `python bin/make_og_image.py`.** The link-preview
+banner and the iOS icon are both built from it, and nothing in the build checks that they match —
+see the warning in §8.
 
 ---
 
@@ -370,8 +380,9 @@ _pages/cv.md                 CV page: points the layout at _data/cv.yml
 _pages/news.md               the full news archive at /news/ -- NOT in the navbar
 _pages/talks.md              unlisted slides page at /talks/ -- see below
 _layouts/default.liquid       adds <meta noindex> to any page with `noindex: true`
+bin/make_og_image.py         builds the link-preview banner and the iOS icon from the photo
 assets/pdf/                  the compiled CV PDF, and any slides linked from /talks/
-assets/img/                  the two profile photos
+assets/img/                  the profile photos, the og_preview banner, the apple-touch icon
 assets/css/main.scss         every style decision on the site
 _config.yml                  site-wide settings
 robots.txt                   currently blocking all crawlers -- see below
@@ -410,12 +421,22 @@ well as the folder.
    curl -s https://gafap.github.io/         | grep -c noindex   # expect 0
    ```
 
-3. **Consider `apple_touch_icon`.** Empty, so an iOS home-screen bookmark shows a screenshot of the
-   page rather than an icon. A 180×180 PNG fixes it. Cosmetic.
-4. **Check the card renders** by pasting <https://gafap.github.io> into a LinkedIn post box (do not
+3. **Check the card renders** by pasting <https://gafap.github.io> into a LinkedIn post box (do not
    post it) or <https://cards-dev.twitter.com/validator>. Expect the name, title and photo from
    `assets/img/og_preview.png`. Note that these platforms cache aggressively — a card is often the
    version they fetched days ago, not the current one.
+
+   Before trusting the card, check the image is actually *there*:
+
+   ```bash
+   curl -s -o /dev/null -w "%{http_code}\n" https://gafap.github.io/assets/img/og_preview.png
+   ```
+
+   **This has failed once already.** The `clean pic` commit (`0d4c56d`) deleted `og_preview.png`
+   while `og_image:` in `_config.yml` still pointed at it, so for several commits every page on the
+   site advertised a preview image that returned 404 — no card image anywhere, and a green build the
+   whole time. Nothing validates that `og_image:` resolves. The generator now lives at
+   `bin/make_og_image.py` rather than in a commit message, which is where it was when it got lost.
 
 ### Other known open items
 
