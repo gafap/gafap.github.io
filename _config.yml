@@ -142,7 +142,15 @@ og_image: /assets/img/og_preview.png
 analytics:
   # For Google Analytics, see https://support.google.com/analytics/answer/10447272?hl=en&ref_topic=14088998&sjid=5129943941510317771-SA#zippy=%2Cgoogle-sites
   # and follow the instructions for Google Sites. You will need to create a Google Analytics property and copy the Google tag ID.
-  google: # your Google Analytics measurement ID (format: G-XXXXXXXXXX)
+  # Only the measurement ID goes here -- NOT the <script> block Google shows you
+  # under "Install manually". The theme builds the gtag.js snippet from this ID
+  # and injects it into every page's <head>; pasting the raw script as well would
+  # load the tag twice and double-count every visit.
+  #
+  # Unlike `google_site_verification:` further up, this needs no separate on
+  # switch -- there is no `enable_google_analytics` flag. Setting the ID is
+  # enough. Verified on the live page after deploying.
+  google: G-7XM3VT3K14 # your Google Analytics measurement ID (format: G-XXXXXXXXXX)
   cronitor: # cronitor RUM analytics site ID (format: XXXXXXXXX)
   pirsch: # your Pirsch analytics site ID (length 32 characters)
   openpanel: # your Openpanel analytics client ID (format: XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX)
