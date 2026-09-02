@@ -35,9 +35,8 @@ noindex: true
      this page for talks with no paper attached, or when you do not want the link
      public. -->
 
-Slides from conference presentations and invited talks.
-
-- Nothing here yet. Delete this line when you add the first talk.
+- **Educare.** EALE, Barcelona 2026.
+  [Slides](/assets/pdf/eale_slides_15min.pdf)
 
 <!-- Example of the shape to copy:
 
