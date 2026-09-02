@@ -35,7 +35,9 @@ noindex: true
      this page for talks with no paper attached, or when you do not want the link
      public. -->
 
-- **Educare.** EALE, Barcelona 2026.
+Slides from conference presentations and invited talks.
+
+- **Educare.** EALE, Barcelona, September 2026.
   [Slides](/assets/pdf/eale_slides_15min.pdf)
 
 <!-- Example of the shape to copy:
